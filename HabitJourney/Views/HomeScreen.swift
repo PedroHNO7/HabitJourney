@@ -11,7 +11,8 @@ struct HomeScreen: View {
                 Text("HabitJourney")
                     .font(.title)
                     .bold()
-                    .padding(.leading, 20);
+                    .padding(.leading, 20)
+                    .foregroundColor(Color("AppColor/TaskMain"))
                 
             } // HStack - CABEÇALHO
             

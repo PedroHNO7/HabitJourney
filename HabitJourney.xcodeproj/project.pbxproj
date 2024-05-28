@@ -12,7 +12,6 @@
 		22226FF02BFD542A00120B74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22226FEF2BFD542A00120B74 /* Assets.xcassets */; };
 		22226FF32BFD542A00120B74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22226FF22BFD542A00120B74 /* Preview Assets.xcassets */; };
 		22226FFB2BFD591400120B74 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22226FFA2BFD591400120B74 /* SplashScreen.swift */; };
-		22226FFE2BFD5E0C00120B74 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22226FFD2BFD5E0C00120B74 /* AppColors.swift */; };
 		222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222270012BFD5FFD00120B74 /* HomeScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +22,6 @@
 		22226FEF2BFD542A00120B74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22226FF22BFD542A00120B74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22226FFA2BFD591400120B74 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		22226FFD2BFD5E0C00120B74 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		222270012BFD5FFD00120B74 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +59,6 @@
 				22226FEB2BFD542800120B74 /* HabitJourneyApp.swift */,
 				22226FED2BFD542800120B74 /* ContentView.swift */,
 				22226FEF2BFD542A00120B74 /* Assets.xcassets */,
-				22226FFD2BFD5E0C00120B74 /* AppColors.swift */,
 				22226FF12BFD542A00120B74 /* Preview Content */,
 			);
 			path = HabitJourney;
@@ -156,7 +153,6 @@
 			files = (
 				22226FFB2BFD591400120B74 /* SplashScreen.swift in Sources */,
 				222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */,
-				22226FFE2BFD5E0C00120B74 /* AppColors.swift in Sources */,
 				22226FEE2BFD542800120B74 /* ContentView.swift in Sources */,
 				22226FEC2BFD542800120B74 /* HabitJourneyApp.swift in Sources */,
 			);

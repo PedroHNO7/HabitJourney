@@ -4,11 +4,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-//           SplashScreen();
-            HomeScreen();
-            Spacer()
-        }
+        SplashScreen();
     }
 }
 
