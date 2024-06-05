@@ -14,6 +14,7 @@
 		22226FFB2BFD591400120B74 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22226FFA2BFD591400120B74 /* SplashScreen.swift */; };
 		222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222270012BFD5FFD00120B74 /* HomeScreen.swift */; };
 		2230ABE32C0FD95F00DF20E5 /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2230ABE22C0FD95F00DF20E5 /* AddScreen.swift */; };
+		2230ABE52C0FDECA00DF20E5 /* DayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2230ABE42C0FDECA00DF20E5 /* DayScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		22226FFA2BFD591400120B74 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		222270012BFD5FFD00120B74 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		2230ABE22C0FD95F00DF20E5 /* AddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreen.swift; sourceTree = "<group>"; };
+		2230ABE42C0FDECA00DF20E5 /* DayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				22226FFA2BFD591400120B74 /* SplashScreen.swift */,
 				222270012BFD5FFD00120B74 /* HomeScreen.swift */,
+				2230ABE42C0FDECA00DF20E5 /* DayScreen.swift */,
 				2230ABE22C0FD95F00DF20E5 /* AddScreen.swift */,
 			);
 			path = Views;
@@ -154,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2230ABE52C0FDECA00DF20E5 /* DayScreen.swift in Sources */,
 				22226FFB2BFD591400120B74 /* SplashScreen.swift in Sources */,
 				222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */,
 				22226FEE2BFD542800120B74 /* ContentView.swift in Sources */,

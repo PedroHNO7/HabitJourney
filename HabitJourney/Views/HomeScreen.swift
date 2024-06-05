@@ -13,7 +13,7 @@ struct HomeScreen: View {
                         .font(.title)
                         .bold()
                         .padding(.leading, 20)
-                        .foregroundColor(Color("AppColor/TaskMain"))
+                        .foregroundColor(Color("AppColor/TaskMain"));
                     
                 } // HStack - CABEÇALHO
                 
