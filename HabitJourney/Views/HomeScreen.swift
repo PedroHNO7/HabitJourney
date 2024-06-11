@@ -70,7 +70,7 @@ struct HomeScreen: View {
                     } // HStack - DIAS DA SEMANA
                 
                 VStack {
-                    Image("emptyTask").padding(.top, 30);
+                    Image("EmptyTask").padding(.top, 30);
                     Text("No habits created yet.\nGet started and make the first step")
                             .multilineTextAlignment(.center)
                             .padding(.top, 30)

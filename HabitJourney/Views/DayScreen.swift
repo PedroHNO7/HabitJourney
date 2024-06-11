@@ -1,9 +1,4 @@
-//
-//  DayScreen.swift
-//  HabitJourney
-//
-//  Created by coltec on 04/06/24.
-//
+// Documento responsável peloo dia específico
 
 import SwiftUI
 import UIKit
