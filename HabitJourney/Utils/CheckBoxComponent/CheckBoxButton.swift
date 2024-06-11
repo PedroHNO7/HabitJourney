@@ -13,7 +13,7 @@ class CheckBoxButton: UIButton {
     func setup() {
         addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
         isSelected = false
-        setImage(uncheckedImage, for: .normal)  
+        setImage(uncheckedImage, for: .normal)
         setTitleColor(.black, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 16)
         

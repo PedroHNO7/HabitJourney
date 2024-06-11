@@ -15,7 +15,7 @@ struct HomeScreen: View {
                         .padding(.leading, 20)
                         .foregroundColor(Color("AppColor/TaskMain"));
                     
-                }.padding(.bottom, 80 ) // HStack - CABEÇALHO
+                }.padding(.bottom, 80); // HStack - CABEÇALHO
                 
                 HStack {
                     // Dia atual - TO-DO: Mudar o dia com dia atual em si
@@ -31,7 +31,7 @@ struct HomeScreen: View {
                             AddScreen()
                         } label:{
                             Image("Button")
-                        }
+                        };
                     
                     
                 } // HStack - DIA E BOTÃO
