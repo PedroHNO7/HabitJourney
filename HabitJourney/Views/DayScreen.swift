@@ -5,11 +5,13 @@ import UIKit
 
 struct DayScreen: View {
     
-    
+    @State var percent: CGFloat = 0
     
     
     var body: some View {
         NavigationView{
+            
+            
             
             VStack{
                 
@@ -37,12 +39,32 @@ struct DayScreen: View {
                         } label:{
                             Image("Button")
                         }
+                        
                 } //HStack data e botão
                 
+                
                 HStack{
+                    // Barra de progresso
+                    ProgressBar(width: 300, height: 20, percent: percent)
+                        .animation(.spring)
+                        
                     
+                    Button(action: { percent = 50}, label: {
+                        Text("Gerador")
+                    })
 
-                } // Aqui sera o código de barra
+                }// HStack barra de progresso
+                
+                
+                VStack {
+                    Image("emptyTask").padding(.top, 30);
+                    Text("Sem hábitos criados ainda.\nComece e dê o primeiro passo.")
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 30)
+                            .font(.system(size: 20))
+                            .bold();
+                    
+                } // VStack - IMAGEM E TEXTO
                 
             } //VStack
             
@@ -51,11 +73,6 @@ struct DayScreen: View {
 }
 
 
-
-
-func loadView() {
-    
-}
 
 #Preview {
     DayScreen()
