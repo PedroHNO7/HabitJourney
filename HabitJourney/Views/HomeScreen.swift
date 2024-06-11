@@ -15,7 +15,7 @@ struct HomeScreen: View {
                         .padding(.leading, 20)
                         .foregroundColor(Color("AppColor/TaskMain"));
                     
-                } // HStack - CABEÇALHO
+                }.padding(.bottom, 80 ) // HStack - CABEÇALHO
                 
                 HStack {
                     // Dia atual - TO-DO: Mudar o dia com dia atual em si
@@ -39,9 +39,34 @@ struct HomeScreen: View {
                 
                 
                     HStack {
-                        Text("D S T Q Q S S")
+                        Text("D")
                             .padding(12)
                             .font(.system(size: 20));
+                        Text("S")
+                            .padding(12)
+                            .font(.system(size: 20));
+                        
+                        Text("T")
+                            .padding(12)
+                            .font(.system(size: 20));
+                        
+                        Text("Q")
+                            .padding(12)
+                            .font(.system(size: 20));
+                        
+                        Text("Q")
+                            .padding(12)
+                            .font(.system(size: 20));
+                        
+                        Text("S")
+                            .padding(12)
+                            .font(.system(size: 20));
+                        
+                        Text("S")
+                            .padding(12)
+                            .font(.system(size: 20));
+                        
+                        
                     } // HStack - DIAS DA SEMANA
                 
                 VStack {

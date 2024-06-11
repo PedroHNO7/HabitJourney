@@ -22,6 +22,7 @@ struct AddScreen: View {
                 Text("Qual é o hábito deve ser registrado?");
                 TextField("Exercitar, ler livros, etc...", text: $inputString)
                     .frame(width: 350, height: 50)
+                    .textFieldStyle(.roundedBorder)
                     .border(Color(("AppColor/MarginSecondary")), width: 5)
                     .multilineTextAlignment(TextAlignment.center);
                     
