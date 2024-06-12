@@ -27,7 +27,7 @@ struct AddScreen: View {
                 VStack(alignment: .leading) {
                     ForEach(0..<7, id: \.self) { index in
                         HStack {
-                            CheckBoxButtonWrapper(isChecked: self.$checkedDays[index])
+                            CheckBoxButtonWrapper(isChecked: self.$checkedDays[index]) // { isChecked in self.checkedDays[index] = isChecked } Teste para trocar o estado de cada dia
                                 .frame(width: 45, height: 45)
                             Text(self.weekday(for: index))
                         };
