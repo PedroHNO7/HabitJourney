@@ -5,7 +5,8 @@ import UIKit
 
 struct DayScreen: View {
     
-    @State var percent: CGFloat = 0
+    @State var percent: CGFloat = 0;
+    @State private var checkedHabits = [false, false, false, false, false]
     
     
     var body: some View {
@@ -24,7 +25,7 @@ struct DayScreen: View {
                 } // HStack dia da semana
                 
                 
-                HStack{
+                HStack {
                     // Dia atual - TO-DO: Mudar o dia com dia atual em si
                     Text("12/06")
                         .font(.title)
@@ -38,42 +39,74 @@ struct DayScreen: View {
                             AddScreen()
                         } label:{
                             Image("Button")
-                        }
-                        
-                } //HStack data e botão
+                        };
+                    
+                    
+                } // HStack - DIA E BOTÃO
+                .padding(.trailing, 20);
                 
                 
                 HStack{
                     // Barra de progresso
                     ProgressBar(width: 300, height: 20, percent: percent)
                         .animation(.spring)
+                        .padding(.vertical, 12)
                         
                     
-                    Button(action: { percent = 50}, label: {
-                        Text("Gerador")
-                    })
+                    
 
                 }// HStack barra de progresso
                 
                 
-                VStack {
-                    Image("emptyTask").padding(.top, 30);
-                    Text("Sem hábitos criados ainda.\nComece e dê o primeiro passo.")
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 30)
-                            .font(.system(size: 20))
-                            .bold();
+                VStack(alignment: .leading) {
+                                    ForEach(0..<checkedHabits.count, id: \.self) { index in
+                                        HStack {
+                                            CheckBoxButtonWrapper(isChecked: $checkedHabits[index])
+                                                .frame(width: 45, height: 45)
+                                                .onChange(of: checkedHabits[index]) {
+                                                    updateProgress()
+                                                        
+                                                }
+                                            
+                                            Text("Hábito \(index + 1)")
+                                                .multilineTextAlignment(.center)
+                                        }
+                                    }
+                                }
+                
+                // Cabeçalho com a imagem e o texto
+                HStack {
+                    Image("HabitJourney");
+                    Text("HabitJourney")
+                        .font(.title)
+                        .bold()
+                        .padding(.leading, 20)
+                        .foregroundColor(Color("AppColor/TaskMain"));
                     
-                } // VStack - IMAGEM E TEXTO
+                }.padding(.top, 80); // HStack - CABEÇALHO
                 
             } //VStack
             
         } //NavigationView
+    
+    }
+    
+    func updateProgress() {
+        // 1. Calcula o número total de hábitos
+        let totalHabits = CGFloat(checkedHabits.count)
+            
+        // 2. Conta quantos hábitos estão marcados como completos
+        let checkedCount = CGFloat(checkedHabits.filter { $0 }.count)
+        
+        percent = (checkedCount / totalHabits) * 100
     }
 }
+
+
 
 
 
 #Preview {
     DayScreen()
 }
+
