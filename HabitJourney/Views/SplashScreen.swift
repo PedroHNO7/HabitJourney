@@ -24,7 +24,7 @@ struct SplashScreen: View {
                     Text("Uma jornada de mil milhas começa com um único passo")
                         .font(.callout);
                 }.onAppear{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                         withAnimation{
                             self.isActive = true;
                         }

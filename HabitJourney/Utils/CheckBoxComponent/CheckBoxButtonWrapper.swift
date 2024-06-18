@@ -1,16 +1,16 @@
 import SwiftUI
 
-struct CheckBoxButtonWrapper: UIViewRepresentable {
-    
+struct CheckBoxButtonWrapper: View {
     @Binding var isChecked: Bool
     
-    func makeUIView(context: Context) -> CheckBoxButton {
-        let checkbox = CheckBoxButton()
-        checkbox.setup()
-        return checkbox
-    }
-    
-    func updateUIView(_ uiView: CheckBoxButton, context: Context) {
-        uiView.isSelected = isChecked
+    var body: some View {
+        Button(action: {
+            self.isChecked.toggle()
+        }) {
+            Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .foregroundColor(isChecked ? .blue : .gray)
+        }
     }
 }
