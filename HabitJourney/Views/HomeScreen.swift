@@ -71,7 +71,7 @@ struct HomeScreen: View {
                 
                 VStack {
                     Image("EmptyTask").padding(.top, 30);
-                    Text("No habits created yet.\nGet started and make the first step")
+                    Text("Nenhum hábito criado ainda.\nComece e dê o primeiro passo.")
                             .multilineTextAlignment(.center)
                             .padding(.top, 30)
                             .font(.system(size: 20))

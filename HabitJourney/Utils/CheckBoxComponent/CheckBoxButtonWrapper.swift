@@ -7,10 +7,8 @@ struct CheckBoxButtonWrapper: View {
         Button(action: {
             self.isChecked.toggle()
         }) {
-            Image(systemName: isChecked ? "checkmark.square.fill" : "square")
-                .resizable()
-                .frame(width: 25, height: 25)
-                .foregroundColor(isChecked ? .blue : .gray)
+            Image(uiImage: UIImage(named: isChecked ? "Checked" : "Unchecked")!)
+                .frame(width: 30, height: 30)
         }
     }
 }
