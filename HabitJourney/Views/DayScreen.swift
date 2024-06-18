@@ -59,15 +59,17 @@ struct DayScreen: View {
                 
                 
                 VStack(alignment: .leading) {
+                                    //Cria um HStack para cada hábito
                                     ForEach(0..<checkedHabits.count, id: \.self) { index in
                                         HStack {
                                             CheckBoxButtonWrapper(isChecked: $checkedHabits[index])
                                                 .frame(width: 45, height: 45)
+                                                //Chama a função sempre que o estado do checkbox muda
                                                 .onChange(of: checkedHabits[index]) {
                                                     updateProgress()
                                                         
                                                 }
-                                            
+                                            //Texto de cada hábito
                                             Text("Hábito \(index + 1)")
                                                 .multilineTextAlignment(.center)
                                         }
@@ -92,12 +94,13 @@ struct DayScreen: View {
     }
     
     func updateProgress() {
-        // 1. Calcula o número total de hábitos
+        // Número total de hábitos
         let totalHabits = CGFloat(checkedHabits.count)
             
-        // 2. Conta quantos hábitos estão marcados como completos
+        // Número de hábitos marcados
         let checkedCount = CGFloat(checkedHabits.filter { $0 }.count)
         
+        // Atualiza a porcentagem com base na quantidade de hábitos marcados
         percent = (checkedCount / totalHabits) * 100
     }
 }

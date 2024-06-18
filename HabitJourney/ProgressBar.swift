@@ -18,10 +18,12 @@ struct ProgressBar: View {
         let multiplier = width / 100
         
         ZStack(alignment: .leading) {
+            //Cria um retângulo com cantos arredondados e adiciona estilos
             RoundedRectangle(cornerRadius: height, style: .continuous)
                 .frame(width: width, height: height)
                 .foregroundColor(Color ("AppColor/MarginSecondary"))
             
+            // Cria outro retângulo arredondado para indicar o progresso e adiciona estilos
             RoundedRectangle(cornerRadius: height, style: .continuous)
                 .frame(width: percent * multiplier, height: height)
                 .background{
