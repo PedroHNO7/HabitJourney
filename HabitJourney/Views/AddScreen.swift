@@ -13,12 +13,17 @@ struct AddScreen: View {
                     Text("Criar um novo hábito").font(.title).multilineTextAlignment(.center).bold()
                 }.padding(.bottom, 12)
                 
-                Text("Qual é o hábito deve ser registrado?")
+                Text("Qual é o hábito que deve ser registrado?")
                 TextField("Exercitar, ler livros, etc...", text: $inputString)
                     .frame(width: 350, height: 50)
-                    .textFieldStyle(.roundedBorder)
-                    .border(Color(("AppColor/MarginSecondary")), width: 5)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                    )
                     .multilineTextAlignment(.center)
+                    .padding(.vertical, 20)
+
                 
                 Text("Qual a recorrência?").font(.title3).bold().padding(.top, 20)
                 
