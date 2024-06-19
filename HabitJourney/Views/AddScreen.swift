@@ -24,10 +24,9 @@ struct AddScreen: View {
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 20)
 
-                
                 Text("Qual a recorrência?").font(.title3).bold().padding(.top, 20)
-                
-                VStack(alignment: .leading) {
+                ScrollView {
+                     VStack(alignment: .leading) {
                     ForEach(0..<7, id: \.self) { index in
                         HStack {
                             CheckBoxButtonWrapper(isChecked: self.$checkedDays[index])
@@ -36,9 +35,8 @@ struct AddScreen: View {
                         }
                     }
                 }
-                
+            }
                 Button(action: {
-                    // Handle submission here
                     self.submitData()
                 }) {
                     Text("Submit")
