@@ -1,17 +1,13 @@
-//
-//  HabitJourneyApp.swift
-//  HabitJourney
-//
-//  Created by coltec on 21/05/24.
-//
-
 import SwiftUI
 
 @main
 struct HabitJourneyApp: App {
+    @StateObject private var habitStore = HabitStore()
+
     var body: some Scene {
         WindowGroup {
-            SplashScreen();
+            SplashScreen()
+                .environmentObject(habitStore)
         }
     }
 }

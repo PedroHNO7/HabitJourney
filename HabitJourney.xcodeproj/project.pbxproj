@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2207DD1F2C2E11B500A0E457 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207DD1E2C2E11B500A0E457 /* Habit.swift */; };
+		2207DD222C2E126500A0E457 /* HabitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207DD212C2E126500A0E457 /* HabitStore.swift */; };
 		22145DBA2C190472004B2BC6 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22145DB92C190472004B2BC6 /* ProgressBar.swift */; };
 		22226FEC2BFD542800120B74 /* HabitJourneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22226FEB2BFD542800120B74 /* HabitJourneyApp.swift */; };
 		22226FEE2BFD542800120B74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22226FED2BFD542800120B74 /* ContentView.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2207DD1E2C2E11B500A0E457 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		2207DD212C2E126500A0E457 /* HabitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStore.swift; sourceTree = "<group>"; };
 		22145DB92C190472004B2BC6 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		22226FE82BFD542800120B74 /* HabitJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22226FEB2BFD542800120B74 /* HabitJourneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitJourneyApp.swift; sourceTree = "<group>"; };
@@ -46,6 +50,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2207DD202C2E124C00A0E457 /* Habits */ = {
+			isa = PBXGroup;
+			children = (
+				2207DD1E2C2E11B500A0E457 /* Habit.swift */,
+				2207DD212C2E126500A0E457 /* HabitStore.swift */,
+			);
+			path = Habits;
+			sourceTree = "<group>";
+		};
 		22226FDF2BFD542800120B74 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +111,7 @@
 		22EBF3D22C19026F00C0AD4C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2207DD202C2E124C00A0E457 /* Habits */,
 				22EBF3DC2C19073400C0AD4C /* CheckBoxComponent */,
 			);
 			path = Utils;
@@ -188,8 +202,10 @@
 				222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */,
 				22226FEE2BFD542800120B74 /* ContentView.swift in Sources */,
 				22EBF3D82C1904B500C0AD4C /* CheckBoxButton.swift in Sources */,
+				2207DD1F2C2E11B500A0E457 /* Habit.swift in Sources */,
 				2230ABE32C0FD95F00DF20E5 /* AddScreen.swift in Sources */,
 				22226FEC2BFD542800120B74 /* HabitJourneyApp.swift in Sources */,
+				2207DD222C2E126500A0E457 /* HabitStore.swift in Sources */,
 				22145DBA2C190472004B2BC6 /* ProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

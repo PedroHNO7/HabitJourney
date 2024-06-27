@@ -1,115 +1,111 @@
-// Documento responsável peloo dia específico
-
 import SwiftUI
-import UIKit
 
 struct DayScreen: View {
-    
-    @State var percent: CGFloat = 0;
-    @State private var checkedHabits = [false, false, false, false, false]
-    
-    
+    // Adiciona uma variavel para armazenar os habitos
+    @EnvironmentObject var habitStore: HabitStore
+    @State private var checkedHabits: [UUID: Bool] = [:]
+    var selectedDate: Date
+
+    // Define se o habito é pro dia selecionado
+    var habitsForTheDay: [Habit] {
+        let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1
+        return habitStore.habits.filter { $0.recurrence.contains(weekday) }
+    }
+
+    // Ve se o hábito foi completado (checkedBox)
+    var completedHabitsCount: Int {
+        habitsForTheDay.filter { checkedHabits[$0.id] ?? false }.count
+    }
+
+    // Pega a contagem de Habitos
+    var totalHabitsCount: Int {
+        habitsForTheDay.count
+    }
+
+    // Porcentagem da barra de progresso para animação
+    var percent: CGFloat {
+        totalHabitsCount > 0 ? CGFloat(completedHabitsCount) / CGFloat(totalHabitsCount) * 100 : 0
+    }
+
     var body: some View {
-        NavigationView{
-            
-            
-            
-            VStack{
+        VStack {
+            HStack {
+                // Adiciona o dia atual em cima
+                Text(dayFormatter.string(from: selectedDate))
+                    .font(.title)
+                    .bold()
+                    .padding(.leading, 20)
                 
-                
-                HStack(){
-                    Text("Sunday")
-                        .font(.title)
-                        .bold()
-                        .padding(.leading,20)
-                } // HStack dia da semana
-                
-                
-                HStack {
-                    // Dia atual - TO-DO: Mudar o dia com dia atual em si
-                    Text("12/06")
-                        .font(.title)
-                        .padding(.leading, 20);
-                    
-                    
-                    Spacer();
-                    
-                        // Botão personalizado
-                        NavigationLink(){
-                            AddScreen()
-                        } label:{
-                            Image("Button")
-                        };
-                    
-                    
-                } // HStack - DIA E BOTÃO
-                .padding(.trailing, 20);
-                
-                
-                HStack{
-                    // Barra de progresso
-                    ProgressBar(width: 300, height: 20, percent: percent)
-                        .animation(.spring)
-                        .padding(.vertical, 12)
-                        
-                    
-                    
+            }.padding(.vertical, 30)
 
-                }// HStack barra de progresso
-                
-                
+            HStack {
+                Text(dateFormatter.string(from: selectedDate))
+                    .font(.title)
+                    .bold()
+                    .padding(.leading, 20)
+
+                Spacer()
+
+                // Passa o dia selecionado para o AddScreen
+                NavigationLink(destination: AddScreen(selectedDate: selectedDate)) {
+                    Image("Button")
+                }
+            } // HStack - DIA E BOTÃO
+            .padding(.trailing, 20)
+
+            // Barra de progresso
+            HStack {
+                ProgressBar(width: 300, height: 20, percent: percent)
+                    .animation(.spring())
+                    .padding(.vertical, 12)
+            }
+
+            ScrollView {
                 VStack(alignment: .leading) {
-                                    //Cria um HStack para cada hábito
-                                    ForEach(0..<checkedHabits.count, id: \.self) { index in
-                                        HStack {
-                                            CheckBoxButtonWrapper(isChecked: $checkedHabits[index])
-                                                .frame(width: 45, height: 45)
-                                                //Chama a função sempre que o estado do checkbox muda
-                                                .onChange(of: checkedHabits[index]) {
-                                                    updateProgress()
-                                                        
-                                                }
-                                            //Texto de cada hábito
-                                            Text("Hábito \(index + 1)")
-                                                .multilineTextAlignment(.center)
-                                        }
-                                    }
-                                }
-                
-                // Cabeçalho com a imagem e o texto
-                HStack {
-                    Image("HabitJourney");
-                    Text("HabitJourney")
-                        .font(.title)
-                        .bold()
-                        .padding(.leading, 20)
-                        .foregroundColor(Color("AppColor/TaskMain"));
-                    
-                }.padding(.top, 80); // HStack - CABEÇALHO
-                
-            } //VStack
-            
-        } //NavigationView
-    
+                    ForEach(habitsForTheDay) { habit in
+                        HStack {
+                            CheckBoxButtonWrapper(isChecked: Binding<Bool>(
+                                get: { self.checkedHabits[habit.id] ?? false },
+                                set: { self.checkedHabits[habit.id] = $0 }
+                            ))
+                            .frame(width: 45, height: 45)
+                            Text(habit.name)
+                                .multilineTextAlignment(.center)
+                        }
+                    } // ForEACH para criação dos CheckBox e Hábitos
+                }
+            } // ScrollView dos botões
+
+            HStack {
+                Image("HabitJourney")
+                Text("HabitJourney")
+                    .font(.title)
+                    .bold()
+                    .padding(.leading, 20)
+                    .foregroundColor(Color("AppColor/TaskMain"))
+            } // Rodapé com Logo da Aplicação
+            .padding(.top, 80)
+        }
     }
-    
-    func updateProgress() {
-        // Número total de hábitos
-        let totalHabits = CGFloat(checkedHabits.count)
-            
-        // Número de hábitos marcados
-        let checkedCount = CGFloat(checkedHabits.filter { $0 }.count)
-        
-        // Atualiza a porcentagem com base na quantidade de hábitos marcados
-        percent = (checkedCount / totalHabits) * 100
-    }
+
+    // Formatando o dia para DD e MM
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM"
+        return formatter
+    }()
+
+    // Formatando o dia da semana
+    let dayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        formatter.locale = Locale(identifier: "pt_BR")
+        return formatter
+    }()
 }
 
-
-
-
-
-#Preview {
-    DayScreen()
+struct DayScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        DayScreen(selectedDate: Date()).environmentObject(HabitStore())
+    }
 }
-
