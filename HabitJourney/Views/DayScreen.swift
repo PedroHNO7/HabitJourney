@@ -1,9 +1,16 @@
 import SwiftUI
 
 struct DayScreen: View {
-    // Adiciona uma variavel para armazenar os habitos
+    // Adiciona uma variável para armazenar os habitos
     @EnvironmentObject var habitStore: HabitStore
+
+    // Adiciona uma variável para armazenar a barra de progresso
+    @EnvironmentObject var progressStore: ProgressStore
+
+    // Array com os ID's e valores do hábito
     @State private var checkedHabits: [UUID: Bool] = [:]
+
+    // Variável do dia selecionado
     var selectedDate: Date
 
     // Define se o habito é pro dia selecionado
@@ -36,7 +43,7 @@ struct DayScreen: View {
                     .bold()
                     .padding(.leading, 20)
                 
-            }.padding(.vertical, 30)
+            }.padding(.vertical, 30);
 
             HStack {
                 Text(dateFormatter.string(from: selectedDate))
@@ -49,16 +56,23 @@ struct DayScreen: View {
                 // Passa o dia selecionado para o AddScreen
                 NavigationLink(destination: AddScreen(selectedDate: selectedDate)) {
                     Image("Button")
-                }
+                };
             } // HStack - DIA E BOTÃO
-            .padding(.trailing, 20)
+            .padding(.trailing, 20);
 
             // Barra de progresso
             HStack {
                 ProgressBar(width: 300, height: 20, percent: percent)
                     .animation(.spring())
                     .padding(.vertical, 12)
-            }
+                    /*
+                    .onAppear {
+                        self.progressStore.percent = self.percent
+                    }
+                    .onChange(of: percent) { newValue in self.progressStore.percent = newValue
+                    }       
+                */
+            };
 
             ScrollView {
                 VStack(alignment: .leading) {
@@ -66,7 +80,14 @@ struct DayScreen: View {
                         HStack {
                             CheckBoxButtonWrapper(isChecked: Binding<Bool>(
                                 get: { self.checkedHabits[habit.id] ?? false },
-                                set: { self.checkedHabits[habit.id] = $0 }
+                                set: { self.checkedHabits[habit.id] = $0 
+                                    
+                                    /*
+                                        self.checkedHabits[habit.id] =  $0
+                                        saveCheckedHabits()
+                                        self.progressStore.percent = self.percent    
+                                    */
+                                }
                             ))
                             .frame(width: 45, height: 45)
                             Text(habit.name)
@@ -74,7 +95,7 @@ struct DayScreen: View {
                         }
                     } // ForEACH para criação dos CheckBox e Hábitos
                 }
-            } // ScrollView dos botões
+            }; // ScrollView dos botões
 
             HStack {
                 Image("HabitJourney")
@@ -85,15 +106,19 @@ struct DayScreen: View {
                     .foregroundColor(Color("AppColor/TaskMain"))
             } // Rodapé com Logo da Aplicação
             .padding(.top, 80)
-        }
-    }
+        } 
+        /*
+        .onAppear {
+            loadCheckedHabits()
+        */
+    };
 
     // Formatando o dia para DD e MM
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM"
         return formatter
-    }()
+    }();
 
     // Formatando o dia da semana
     let dayFormatter: DateFormatter = {
@@ -101,11 +126,29 @@ struct DayScreen: View {
         formatter.dateFormat = "EEEE"
         formatter.locale = Locale(identifier: "pt_BR")
         return formatter
-    }()
-}
+    }();
+
+    // Salvando os hábitos que foram checados
+    /*
+    func saveCheckedHabits() {
+        let checkedHabitData = try? JSONEncoder().encode(checkedHabits)
+        UserDefaults.standard.set(checkedHabitsData, forKey: "checkedHabits"
+    };
+    */
+
+    // Carregando os hábitos que foram checados
+    /*
+    func loadCheckedHabits() {
+        if let checkedHabitsData = UserDefaults.standard.data(forKey: "checkedHabits"),
+            let loadedCheckedHabits = try? JSONDecoder().decode([UUID: Bool].self, from: checkedHabitsData) {
+            self.checkedHabits = loadedCheckedHabits
+        };
+    };
+    */
+};
 
 struct DayScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DayScreen(selectedDate: Date()).environmentObject(HabitStore())
+        DayScreen(selectedDate: Date()).environmentObject(HabitStore()) // .environmentObject(ProgressStore())
     }
 }
