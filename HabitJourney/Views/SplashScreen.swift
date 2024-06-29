@@ -11,13 +11,15 @@ struct SplashScreen: View {
         ZStack {
             if self.isActive {
                 HomeScreen()
+                .environmentObject(habitStore)
+                .environmentObject(progressStore)
             } else {
                 VStack {
                     Image("HabitJourney")
                         .padding(.bottom, 20);
                     
                     Text("HabitJourney")
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        .font(.title)
                         .bold()
                         .padding(.bottom, 20);
                     
