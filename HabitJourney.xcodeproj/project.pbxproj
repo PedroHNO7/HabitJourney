@@ -18,6 +18,7 @@
 		222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222270012BFD5FFD00120B74 /* HomeScreen.swift */; };
 		2230ABE32C0FD95F00DF20E5 /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2230ABE22C0FD95F00DF20E5 /* AddScreen.swift */; };
 		2230ABE52C0FDECA00DF20E5 /* DayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2230ABE42C0FDECA00DF20E5 /* DayScreen.swift */; };
+		2235A7A12C34B722009FCBCB /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235A7A02C34B722009FCBCB /* ProgressStore.swift */; };
 		22EBF3D82C1904B500C0AD4C /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBF3D72C1904B500C0AD4C /* CheckBoxButton.swift */; };
 		22EBF3DA2C19072200C0AD4C /* CheckBoxButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBF3D92C19072200C0AD4C /* CheckBoxButtonWrapper.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		222270012BFD5FFD00120B74 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		2230ABE22C0FD95F00DF20E5 /* AddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreen.swift; sourceTree = "<group>"; };
 		2230ABE42C0FDECA00DF20E5 /* DayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayScreen.swift; sourceTree = "<group>"; };
+		2235A7A02C34B722009FCBCB /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		22EBF3D72C1904B500C0AD4C /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		22EBF3D92C19072200C0AD4C /* CheckBoxButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButtonWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,6 +57,7 @@
 			children = (
 				2207DD1E2C2E11B500A0E457 /* Habit.swift */,
 				2207DD212C2E126500A0E457 /* HabitStore.swift */,
+				2235A7A02C34B722009FCBCB /* ProgressStore.swift */,
 			);
 			path = Habits;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				22226FFB2BFD591400120B74 /* SplashScreen.swift in Sources */,
 				22EBF3DA2C19072200C0AD4C /* CheckBoxButtonWrapper.swift in Sources */,
 				222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */,
+				2235A7A12C34B722009FCBCB /* ProgressStore.swift in Sources */,
 				22226FEE2BFD542800120B74 /* ContentView.swift in Sources */,
 				22EBF3D82C1904B500C0AD4C /* CheckBoxButton.swift in Sources */,
 				2207DD1F2C2E11B500A0E457 /* Habit.swift in Sources */,

@@ -10,9 +10,8 @@ struct SplashScreen: View {
         
         ZStack {
             if self.isActive {
-                HomeScreen() 
-                // .environmentObject(HabitStore())
-                // .environmentObject(ProgressStore())
+                HomeScreen()
+                    .environmentObject(HabitStore()).environmentObject(ProgressStore())
             } else {
                 VStack {
                     Image("HabitJourney")
@@ -40,3 +39,4 @@ struct SplashScreen: View {
 #Preview {
     SplashScreen()
 }
+
