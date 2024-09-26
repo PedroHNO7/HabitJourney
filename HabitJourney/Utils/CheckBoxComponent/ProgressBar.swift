@@ -1,10 +1,3 @@
-//
-//  ProgressBar.swift
-//  HabitJourney
-//
-//  Created by coltec on 11/06/24.
-//
-
 import SwiftUI
 
 struct ProgressBar: View {

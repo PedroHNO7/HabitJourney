@@ -3,8 +3,11 @@ import SwiftUI
 struct DayScreen: View {
     @EnvironmentObject var habitStore: HabitStore
     @EnvironmentObject var progressStore: ProgressStore
+
     @State private var checkedHabits: [UUID: Bool] = [:]
+
     var selectedDate: Date
+    var userID: String
 
     var habitsForTheDay: [Habit] {
         let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1
@@ -71,7 +74,7 @@ struct DayScreen: View {
                                 }
                             ))
                             .frame(width: 45, height: 45)
-                            Text(habit.name)
+                            Text(habit.title)
                                 .multilineTextAlignment(.center)
                         }
                     }

@@ -1,4 +1,4 @@
-// UIFile responsável pela splash art -- TO-DO: Trocar esse arquivo pelo *Launch Screen*
+// UIFile responsável pela splash art
 
 import SwiftUI
 

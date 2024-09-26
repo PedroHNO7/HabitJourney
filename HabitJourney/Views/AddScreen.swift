@@ -3,16 +3,11 @@
 import SwiftUI
 
 struct AddScreen: View {
-    // Objeto de ambiente para armazenar os hábitos
     @EnvironmentObject var habitStore: HabitStore
     
-    // Estado para armazenar o texto de entrada do usuário
     @State private var inputString: String = ""
-    
-    // Estado para armazenar os dias da semana selecionados
     @State private var checkedDays: [Bool] = Array(repeating: false, count: 7)
-    
-        // Data selecionada para a criação do hábito
+
     var selectedDate: Date
 
     var body: some View {
@@ -82,6 +77,25 @@ struct AddScreen: View {
         let newHabit = Habit(name: inputString, recurrence: recurrence)
         habitStore.habits.append(newHabit)
     }
+
+    // Função de adição do hábito (DB)
+//     func submitData() {
+//     guard !inputString.isEmpty else {
+//         // Show alert or error message
+//         return
+//     }
+    
+//     let recurrence = checkedDays.enumerated().compactMap { $1 ? $0 : nil }
+//     let newHabit = Habit(userID: "someUserID", title: inputString, recurrence: recurrence) // Adjust as necessary
+//     if habitStore.dbManager.insertHabit(habit: newHabit) {
+//         // Success feedback
+//         inputString = "" // Clear input
+//         checkedDays = Array(repeating: false, count: 7) // Reset checkbox states
+//     } else {
+//         // Show error feedback
+//     }
+// }
+
 
     // Retorna os dias da semana com base no indice
     func weekday(for index: Int) -> String {
