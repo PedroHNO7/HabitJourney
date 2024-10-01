@@ -77,6 +77,7 @@ struct AddScreen: View {
          
          return
      }
+         
     
      let recurrence = [false, false, false, false, true, true, true]
          let newHabit = Habit(id: "someHabit", userID: "ss", title: inputString, recurrence: recurrence)
