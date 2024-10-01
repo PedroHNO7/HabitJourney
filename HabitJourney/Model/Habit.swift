@@ -1,17 +1,13 @@
 // Documento responsável pela classe de Hábitos
 
+// Documento responsável pela classe de Hábitos
+
 import SwiftUI
 
 struct Habit: Identifiable {
-    var ID: String
-    var userID: String
-    var title: String
-    var recurrence: [Bool]
+    var id = UUID()
+    var name: String
     
-    init(ID: String = UUID().uuidString, userID: String, title: String, recurrence: [Bool]) {
-        self.ID = ID
-        self.userID = userID
-        self.title = title
-        self.recurrence = recurrence
-    }
+    // Responsável pela recorrencia (0 = Domingo, 6 = Sábado)
+    var recurrence: [Int]
 }

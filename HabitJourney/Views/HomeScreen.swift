@@ -58,7 +58,7 @@ struct HomeScreen: View {
                                 }
                             } else {
                                 // Mostra os outros dias do mês como NavigationLink
-                                NavigationLink(destination: DayScreen(selectedDate: date, userID: "SomeID").environmentObject(habitStore)) {
+                                NavigationLink(destination: DayScreen(selectedDate: date).environmentObject(habitStore)) {
                                     Text(dayFormatter.string(from: date)).bold()
                                         .frame(width: 45, height: 45)
                                         .background(progressColor(for: progressStore.percent))
@@ -125,4 +125,3 @@ struct HomeScreen_Previews: PreviewProvider {
             .environmentObject(ProgressStore())
     }
 }
-
