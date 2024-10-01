@@ -94,7 +94,7 @@ struct DayScreen: View {
                         ))
                         .frame(width: 45, height: 45)
                         
-                        Text(habit.title) // Changed from habit.name to habit.title based on your Habit struct
+                        Text(habit.title)
                             .multilineTextAlignment(.center)
                     }
                 }

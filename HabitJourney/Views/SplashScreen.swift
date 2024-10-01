@@ -10,8 +10,11 @@ struct SplashScreen: View {
         
         ZStack {
             if self.isActive {
-                HomeScreen()
-                    .environmentObject(HabitStore()).environmentObject(ProgressStore())
+                
+                LoginView(userEmail: "", userPassword: "", emailField: FieldModel(value: "", fieldType: .email), passwordField: FieldModel(value: "", fieldType: .password))
+                
+//                HomeScreen()
+//                    .environmentObject(HabitStore()).environmentObject(ProgressStore())
             } else {
                 VStack {
                     Image("HabitJourney")

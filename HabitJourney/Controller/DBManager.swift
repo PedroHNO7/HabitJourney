@@ -157,28 +157,32 @@ class DBManager {
 //    }
     
     // Logar o usuário
-    func logUser(email: String, password: String) -> String? {
-            let queryStatementString = "SELECT userID FROM User WHERE email = ? AND password = ?;"
-            var queryStatement: OpaquePointer? = nil
-
-            if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
-                sqlite3_bind_text(queryStatement, 1, (email as NSString).utf8String, -1, SQLITE_TRANSIENT)
-                sqlite3_bind_text(queryStatement, 2, (password as NSString).utf8String, -1, SQLITE_TRANSIENT)
-
-                if sqlite3_step(queryStatement) == SQLITE_ROW {
-                    let userID = String(cString: sqlite3_column_text(queryStatement, 0))
-                    sqlite3_finalize(queryStatement)
-                    return userID
-                } else {
-                    print("Email ou senha incorretos.")
-                }
-            } else {
-                print("Falha ao preparar a consulta para logar usuário.")
+    func logUser(email:String) -> [User] {
+        let queryStatementString = "SELECT * FROM User WHERE email = ?;"
+        var queryStatement: OpaquePointer? = nil
+        var user : [User] = []
+        
+        if sqlite3_prepare_v2(db,  queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(queryStatement, 1, (email as NSString).utf8String, -1, SQLITE_TRANSIENT)
+            
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+                
+                let id = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                let name = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                let email = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                let password = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                
+                
+                user.append(User(id: id, name: name, email: email, password: password))
+                print("Detalhes do usuário:")
+                print("\(id) | \(name) | \(email) | \(password) | \(id)")
             }
-            sqlite3_finalize(queryStatement)
-            return nil
+        } else {
+            print("SELECT statement falhou.")
         }
-
+        sqlite3_finalize(queryStatement)
+        return user
+    }
 
     // Ler hábitos por ID de usuário
     func getHabitsByUserID(userID: String) -> [Habit] {

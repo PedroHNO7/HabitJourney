@@ -23,6 +23,11 @@
 		22E3F4612CACA28E00C8E08F /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F45E2CACA28E00C8E08F /* CheckBoxButton.swift */; };
 		22E3F4622CACA28E00C8E08F /* CheckBoxButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F45F2CACA28E00C8E08F /* CheckBoxButtonWrapper.swift */; };
 		22E3F4632CACA28E00C8E08F /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F4602CACA28E00C8E08F /* ProgressBar.swift */; };
+		22E3F4842CACBA0B00C8E08F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F4832CACBA0B00C8E08F /* LoginView.swift */; };
+		22E3F4862CACBA3300C8E08F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F4852CACBA3300C8E08F /* SignUpView.swift */; };
+		22E3F48B2CACBAA400C8E08F /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F48A2CACBAA400C8E08F /* FieldModel.swift */; };
+		22E3F48D2CACBAC900C8E08F /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F48C2CACBAC900C8E08F /* FieldType.swift */; };
+		22E3F48F2CACBB1600C8E08F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3F48E2CACBB1600C8E08F /* CustomTextField.swift */; };
 		22EBF3D82C1904B500C0AD4C /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBF3D72C1904B500C0AD4C /* CheckBoxButton.swift */; };
 		22EBF3DA2C19072200C0AD4C /* CheckBoxButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBF3D92C19072200C0AD4C /* CheckBoxButtonWrapper.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +50,11 @@
 		22E3F45E2CACA28E00C8E08F /* CheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		22E3F45F2CACA28E00C8E08F /* CheckBoxButtonWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxButtonWrapper.swift; sourceTree = "<group>"; };
 		22E3F4602CACA28E00C8E08F /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		22E3F4832CACBA0B00C8E08F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = ../../../../LoginView.swift; sourceTree = "<group>"; };
+		22E3F4852CACBA3300C8E08F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		22E3F48A2CACBAA400C8E08F /* FieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
+		22E3F48C2CACBAC900C8E08F /* FieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
+		22E3F48E2CACBB1600C8E08F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		22EBF3D72C1904B500C0AD4C /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		22EBF3D92C19072200C0AD4C /* CheckBoxButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButtonWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,6 +120,7 @@
 		22226FF92BFD589300120B74 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22E3F4822CACB9EC00C8E08F /* LogSign */,
 				22226FFA2BFD591400120B74 /* SplashScreen.swift */,
 				222270012BFD5FFD00120B74 /* HomeScreen.swift */,
 				2230ABE42C0FDECA00DF20E5 /* DayScreen.swift */,
@@ -122,6 +133,7 @@
 		22E3F4532CACA25000C8E08F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				22E3F4872CACBA6400C8E08F /* Field */,
 				22E3F4542CACA25000C8E08F /* DBManager.swift */,
 			);
 			path = Controller;
@@ -144,6 +156,25 @@
 				22E3F4602CACA28E00C8E08F /* ProgressBar.swift */,
 			);
 			path = CheckBoxComponent;
+			sourceTree = "<group>";
+		};
+		22E3F4822CACB9EC00C8E08F /* LogSign */ = {
+			isa = PBXGroup;
+			children = (
+				22E3F4832CACBA0B00C8E08F /* LoginView.swift */,
+				22E3F4852CACBA3300C8E08F /* SignUpView.swift */,
+				22E3F48E2CACBB1600C8E08F /* CustomTextField.swift */,
+			);
+			path = LogSign;
+			sourceTree = "<group>";
+		};
+		22E3F4872CACBA6400C8E08F /* Field */ = {
+			isa = PBXGroup;
+			children = (
+				22E3F48A2CACBAA400C8E08F /* FieldModel.swift */,
+				22E3F48C2CACBAC900C8E08F /* FieldType.swift */,
+			);
+			path = Field;
 			sourceTree = "<group>";
 		};
 		22EBF3D22C19026F00C0AD4C /* Utils */ = {
@@ -245,11 +276,16 @@
 				222270022BFD5FFD00120B74 /* HomeScreen.swift in Sources */,
 				2235A7A12C34B722009FCBCB /* ProgressStore.swift in Sources */,
 				22E3F45A2CACA25000C8E08F /* Habit.swift in Sources */,
+				22E3F4842CACBA0B00C8E08F /* LoginView.swift in Sources */,
 				22E3F4592CACA25000C8E08F /* User.swift in Sources */,
 				22EBF3D82C1904B500C0AD4C /* CheckBoxButton.swift in Sources */,
 				2230ABE32C0FD95F00DF20E5 /* AddScreen.swift in Sources */,
+				22E3F48F2CACBB1600C8E08F /* CustomTextField.swift in Sources */,
 				22E3F45C2CACA27000C8E08F /* ContentView.swift in Sources */,
 				22226FEC2BFD542800120B74 /* HabitJourneyApp.swift in Sources */,
+				22E3F48D2CACBAC900C8E08F /* FieldType.swift in Sources */,
+				22E3F4862CACBA3300C8E08F /* SignUpView.swift in Sources */,
+				22E3F48B2CACBAA400C8E08F /* FieldModel.swift in Sources */,
 				2207DD222C2E126500A0E457 /* HabitStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
