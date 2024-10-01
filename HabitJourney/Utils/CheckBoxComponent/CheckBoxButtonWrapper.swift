@@ -8,6 +8,8 @@ struct CheckBoxButtonWrapper: View {
             self.isChecked.toggle()
         }) {
             Image(uiImage: UIImage(named: isChecked ? "Checked" : "Unchecked")!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 30, height: 30)
         }
     }

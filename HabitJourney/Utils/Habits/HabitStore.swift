@@ -3,17 +3,11 @@
 import SwiftUI
 import Combine
 
-class HabitStore: ObservableObject {
-    @Published var habits: [Habit] = []
-}
-
-// Manipulação da lista com dados do Banco de Dados
-
-// class HabitStore: ObservableObject {
-//     @Published var habits: [Habit] = []
-//     private var dbManager = DBManager()
+ class HabitStore: ObservableObject {
+     @Published var habits: [Habit] = []
+     var dbManager = DBManager()
     
-//     func loadHabits(for userID: String) {
-//         self.habits = dbManager.getHabitsByUserID(userID: userID)
-//     }
-// }
+     func loadHabits(for id: String) {
+         self.habits = dbManager.getHabitsByUserID(userID: id)
+     }
+ }

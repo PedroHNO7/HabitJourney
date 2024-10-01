@@ -71,30 +71,23 @@ struct AddScreen: View {
         .padding(.horizontal, 20)
     }
 
-    // Função de adição do hábito
-    func submitData() {
-        let recurrence = checkedDays.enumerated().compactMap { $1 ? $0 : nil }
-        let newHabit = Habit(name: inputString, recurrence: recurrence)
-        habitStore.habits.append(newHabit)
-    }
-
     // Função de adição do hábito (DB)
-//     func submitData() {
-//     guard !inputString.isEmpty else {
-//         // Show alert or error message
-//         return
-//     }
+     func submitData() {
+     guard !inputString.isEmpty else {
+         
+         return
+     }
     
-//     let recurrence = checkedDays.enumerated().compactMap { $1 ? $0 : nil }
-//     let newHabit = Habit(userID: "someUserID", title: inputString, recurrence: recurrence) // Adjust as necessary
-//     if habitStore.dbManager.insertHabit(habit: newHabit) {
-//         // Success feedback
-//         inputString = "" // Clear input
-//         checkedDays = Array(repeating: false, count: 7) // Reset checkbox states
-//     } else {
-//         // Show error feedback
-//     }
-// }
+     let recurrence = [false, false, false, false, true, true, true]
+         let newHabit = Habit(id: "someHabit", userID: "ss", title: inputString, recurrence: recurrence)
+     if habitStore.dbManager.insertHabit(habit: newHabit) {
+         
+         inputString = ""
+         checkedDays = Array(repeating: false, count: 7)
+     } else {
+         
+     }
+ }
 
 
     // Retorna os dias da semana com base no indice

@@ -75,7 +75,7 @@ struct HomeScreen: View {
             }
         }
     }
-
+//
     var currentWeekdayOffset: Int {
         let calendar = Calendar.current
         let weekday = calendar.component(.weekday, from: currentDate) - 1
