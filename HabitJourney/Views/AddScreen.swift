@@ -5,6 +5,9 @@ import SwiftUI
 struct AddScreen: View {
     @EnvironmentObject var habitStore: HabitStore
     
+    
+    @Binding var userID: String
+    
     @State private var inputString: String = ""
     @State private var checkedDays: [Bool] = Array(repeating: false, count: 7)
 
@@ -78,7 +81,7 @@ struct AddScreen: View {
          return
      }
          
-         let newHabit = Habit(userID: "Pedro", title: inputString, recurrence: 1)
+         let newHabit = Habit(userID: userID, title: inputString, recurrence: 1)
      if habitStore.dbManager.insertHabit(habit: newHabit) {
          
          inputString = ""
@@ -108,10 +111,4 @@ struct AddScreen: View {
         formatter.dateFormat = "dd/MM"
         return formatter
     }()
-}
-
-struct AddScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        AddScreen(selectedDate: Date()).environmentObject(HabitStore())
-    }
 }

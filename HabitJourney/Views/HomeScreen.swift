@@ -6,6 +6,8 @@ struct HomeScreen: View {
     @EnvironmentObject var habitStore: HabitStore
     @EnvironmentObject var progressStore: ProgressStore
 
+    @Binding var userID: String
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -50,7 +52,7 @@ struct HomeScreen: View {
                         if index >= currentWeekday {
                             if index - currentWeekday == currentDay - 1 {
                                 // Mostra o dia atual como um NavigationLink
-                                NavigationLink(destination: DayScreen(selectedDate: date).environmentObject(habitStore)) {
+                                NavigationLink(destination: DayScreen(userID: $userID, selectedDate: date).environmentObject(habitStore)) {
                                     Text(dayFormatter.string(from: date)).bold()
                                         .frame(width: 45, height: 45)
                                         .background(progressColor(for: progressStore.percent))
@@ -59,7 +61,7 @@ struct HomeScreen: View {
                                 }
                             } else {
                                 // Mostra os outros dias do mês como NavigationLink
-                                NavigationLink(destination: DayScreen(selectedDate: date).environmentObject(habitStore)) {
+                                NavigationLink(destination: DayScreen(userID: $userID, selectedDate: date).environmentObject(habitStore)) {
                                     Text(dayFormatter.string(from: date)).bold()
                                         .frame(width: 45, height: 45)
                                         .background(progressColor(for: progressStore.percent))
@@ -116,13 +118,5 @@ struct HomeScreen: View {
         case 60..<80: return Color("AppColor/TaskMain75")
         default: return Color("AppColor/TaskMain")
         }
-    }
-}
-
-struct HomeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeScreen()
-            .environmentObject(HabitStore())
-            .environmentObject(ProgressStore())
     }
 }

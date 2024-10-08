@@ -9,6 +9,8 @@ struct LoginView: View {
     @State var message: String = ""
     @State var show = false
     
+    @State var userID: String = ""
+    
     @State var emailField: FieldModel
     @State var passwordField: FieldModel
     
@@ -18,7 +20,7 @@ struct LoginView: View {
         
         ZStack {
             if self.isActive {
-                HomeScreen()
+                HomeScreen(userID: $userID)
                     .environmentObject(HabitStore()).environmentObject(ProgressStore())
             } else {
                 
@@ -56,6 +58,8 @@ struct LoginView: View {
                                     userPassword = passwordField.value
                                     
                                     if user.password == userPassword{
+                                        
+                                        userID = user.id
                                         isActive = true;
                                     } else {
                                         message = "E-mail ou senha incorretos"

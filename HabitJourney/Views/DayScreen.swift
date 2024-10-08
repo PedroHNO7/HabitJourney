@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DayScreen: View {
+    @Binding var userID: String
     
     let db = DBManager()
     
@@ -56,7 +57,7 @@ struct DayScreen: View {
 
                 Spacer()
 
-                NavigationLink(destination: AddScreen(selectedDate: selectedDate)) {
+                NavigationLink(destination: AddScreen( userID: $userID, selectedDate: selectedDate)) {
                     Image("Button")
                 }
                 
@@ -145,13 +146,5 @@ struct DayScreen: View {
            let loadedCheckedHabits = try? JSONDecoder().decode([String].self, from: checkedHabitsData) {
             self.checkedHabits = Set(loadedCheckedHabits)
         }
-    }
-}
-
-struct DayScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        DayScreen(selectedDate: Date())
-            .environmentObject(HabitStore())
-            .environmentObject(ProgressStore())
     }
 }
