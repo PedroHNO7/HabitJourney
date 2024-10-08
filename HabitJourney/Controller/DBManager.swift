@@ -132,29 +132,31 @@ class DBManager {
         return false
     }
     
-//    // Ler todos os hábitos
-//    func getAllHabits() -> [Habit] {
-//        let queryStatementString = "SELECT * FROM Habit;"
-//        var queryStatement: OpaquePointer? = nil
-//        var habits: [Habit] = []
-//
-//        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
-//            while sqlite3_step(queryStatement) == SQLITE_ROW {
-//                let ID = String(cString: sqlite3_column_text(queryStatement, 0))
-//                let userID = String(cString: sqlite3_column_text(queryStatement, 1))
-//                let title = String(cString: sqlite3_column_text(queryStatement, 2))
-//                let recurrenceData = String(cString: sqlite3_column_text(queryStatement, 3))
-//                let recurrence = try! JSONDecoder().decode([Bool].self, from: Data(base64Encoded: recurrenceData)!)
-//
-//                let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
-//                habits.append(habit)
-//            }
-//        } else {
-//            print("Falha ao executar SELECT para Habit.")
-//        }
-//        sqlite3_finalize(queryStatement)
-//        return habits
-//    }
+    // Ler todos os hábitos
+    func getAllHabits() -> [Habit] {
+        let queryStatementString = "SELECT * FROM Habit;"
+        var queryStatement: OpaquePointer? = nil
+        var habits: [Habit] = []
+
+        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+                let ID = String(cString: sqlite3_column_text(queryStatement, 0))
+                let userID = String(cString: sqlite3_column_text(queryStatement, 1))
+                let title = String(cString: sqlite3_column_text(queryStatement, 2))
+                let recurrenceData = String(cString: sqlite3_column_text(queryStatement, 3))
+                let recurrence = sqlite3_column_int(queryStatement, 4)
+
+                let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
+                habits.append(habit)
+                
+                print(habits)
+            }
+        } else {
+            print("Falha ao executar SELECT para Habit.")
+        }
+        sqlite3_finalize(queryStatement)
+        return habits
+    }
     
     // Logar o usuário
     func logUser(email:String) -> [User] {
@@ -172,10 +174,9 @@ class DBManager {
                 let email = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
                 let password = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                 
-                
                 user.append(User(id: id, name: name, email: email, password: password))
                 print("Detalhes do usuário:")
-                print("\(id) | \(name) | \(email) | \(password) | \(id)")
+                print("| \(id) | \(name) | \(email) | \(password) |")
             }
         } else {
             print("SELECT statement falhou.")
@@ -198,7 +199,7 @@ class DBManager {
                 let userID = String(cString: sqlite3_column_text(queryStatement, 1))
                 let title = String(cString: sqlite3_column_text(queryStatement, 2))
                 let recurrenceData = String(cString: sqlite3_column_text(queryStatement, 3))
-                let recurrence = try! JSONDecoder().decode([Bool].self, from: Data(base64Encoded: recurrenceData)!)
+                let recurrence = sqlite3_column_int(queryStatement, 4)
 
                 let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
                 habits.append(habit)

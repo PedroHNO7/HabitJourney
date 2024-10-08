@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @State private var currentDate = Date()
+    
     @EnvironmentObject var habitStore: HabitStore
     @EnvironmentObject var progressStore: ProgressStore
 

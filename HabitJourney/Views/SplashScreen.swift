@@ -12,9 +12,6 @@ struct SplashScreen: View {
             if self.isActive {
                 
                 LoginView(userEmail: "", userPassword: "", emailField: FieldModel(value: "", fieldType: .email), passwordField: FieldModel(value: "", fieldType: .password))
-                
-//                HomeScreen()
-//                    .environmentObject(HabitStore()).environmentObject(ProgressStore())
             } else {
                 VStack {
                     Image("HabitJourney")

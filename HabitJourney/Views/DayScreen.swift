@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct DayScreen: View {
+    
+    let db = DBManager()
+    
     @EnvironmentObject var habitStore: HabitStore
     @EnvironmentObject var progressStore: ProgressStore
     @State private var checkedHabits: Set<String> = []
@@ -8,7 +11,7 @@ struct DayScreen: View {
 
     var habitsForTheDay: [Habit] {
         let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1
-        return habitStore.habits.filter { $0.recurrence.contains(weekday != 0) }
+        return habitStore.habits.filter { $0.recurrence != 0 }
     }
 
     var completedHabitsCount: Int {
@@ -55,6 +58,10 @@ struct DayScreen: View {
 
                 NavigationLink(destination: AddScreen(selectedDate: selectedDate)) {
                     Image("Button")
+                }
+                
+                Button("TODOS") {
+                    db.getAllHabits()
                 }
             }
             .padding(.trailing, 20)

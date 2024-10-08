@@ -14,7 +14,7 @@ struct AddScreen: View {
         VStack {
             VStack {
                 Text(dateFormatter.string(from: selectedDate))
-                    .font(.largeTitle)
+                    .font(.headline)
                     .bold()
                     .padding(.bottom, 12)
                 Text("Criar um novo hábito")
@@ -41,7 +41,7 @@ struct AddScreen: View {
             Text("Qual a recorrência?")
                 .font(.title3)
                 .bold()
-                .padding(.top, 20)
+                .padding(.top, 8)
 
             ScrollView {
                 VStack(alignment: .leading) {
@@ -78,13 +78,10 @@ struct AddScreen: View {
          return
      }
          
-    
-     let recurrence = [false, false, false, false, true, true, true]
-         let newHabit = Habit(id: "someHabit", userID: "ss", title: inputString, recurrence: recurrence)
+         let newHabit = Habit(userID: "Pedro", title: inputString, recurrence: 1)
      if habitStore.dbManager.insertHabit(habit: newHabit) {
          
          inputString = ""
-         checkedDays = Array(repeating: false, count: 7)
      } else {
          
      }

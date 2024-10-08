@@ -7,14 +7,12 @@ struct SignUpView: View {
     @State var userName: String
     @State var userEmail: String
     @State var userPassword: String
-    @State var userAddress: String
     
     
     @State var show: Bool = false
     
     @State var nameField: FieldModel = FieldModel(value: "", fieldType: .name)
     @State var emailField: FieldModel = FieldModel(value: "", fieldType: .email)
-    @State var addressField: FieldModel = FieldModel(value: "", fieldType: .address)
     @State var passwordField: FieldModel = FieldModel(value: "", fieldType: .password)
     
     
@@ -32,32 +30,26 @@ struct SignUpView: View {
             CustomTextField(fieldModel: $nameField)
                 .onSubmit {
                     nameField.onSubmitError()
-                }
+                }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             
             
             CustomTextField(fieldModel: $emailField)
                 .onSubmit {
                     emailField.onSubmitError()
-                }
+                }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             
-            CustomTextField(fieldModel: $addressField)
-                .onSubmit {
-                    addressField.onSubmitError()
-                }
          
            
             CustomTextField(fieldModel: $passwordField)
                 .onSubmit {
                     emailField.onSubmitError()
-                }
+                }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             
             Button("Cadastrar"){
                 
                 var name = nameField.onValidate()
                 
                 var email = emailField.onValidate()
-                
-                var address = addressField.onValidate()
                
                 var password = passwordField.onValidate()
             
@@ -88,6 +80,6 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView(userName: "", userEmail: "", userPassword: "", userAddress: "")
+    SignUpView(userName: "", userEmail: "", userPassword: "")
 }
 
