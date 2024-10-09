@@ -203,6 +203,8 @@ class DBManager {
 
                 let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
                 habits.append(habit)
+                
+                print(habits)
             }
         } else {
             print("Falha ao executar SELECT para Habit.")

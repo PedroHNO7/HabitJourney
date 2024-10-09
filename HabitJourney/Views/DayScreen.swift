@@ -62,7 +62,8 @@ struct DayScreen: View {
                 }
                 
                 Button("TODOS") {
-                    db.getAllHabits()
+                    db.getHabitsByUserID(userID: userID)
+                    
                 }
             }
             .padding(.trailing, 20)
