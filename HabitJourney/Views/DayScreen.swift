@@ -11,9 +11,18 @@ struct DayScreen: View {
     var selectedDate: Date
 
     var habitsForTheDay: [Habit] {
-        let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1
-        return habitStore.habits.filter { $0.recurrence != 0 }
+        let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1  // O índice do dia da semana (0 a 6)
+        
+        return habitStore.habits.filter { habit in
+            // Verifica se a string de recorrência tem comprimento suficiente e se o dia correspondente está ativo
+            if habit.recurrence.count > weekday {
+                let isActiveForToday = habit.recurrence[habit.recurrence.index(habit.recurrence.startIndex, offsetBy: weekday)] == "1"
+                return isActiveForToday
+            }
+            return false
+        }
     }
+
 
     var completedHabitsCount: Int {
         checkedHabits.intersection(Set(habitsForTheDay.map { $0.id })).count

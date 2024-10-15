@@ -19,7 +19,6 @@ struct SignUpView: View {
     var body: some View {
         VStack{
             
-            
             Image(systemName: "pencil")
             Text("Cadastro").padding(.bottom)
             

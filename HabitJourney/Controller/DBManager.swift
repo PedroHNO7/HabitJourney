@@ -56,15 +56,16 @@ class DBManager {
     // Criando a tabela Habit
     func createHabitTable() {
         let createTableString = """
-            CREATE TABLE IF NOT EXISTS Habit (
-                taskID TEXT PRIMARY KEY,
-                userID TEXT,
-                title TEXT NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                recurrence TEXT NOT NULL,
-                FOREIGN KEY (userID) REFERENCES User(userID)
-            );
-        """
+                CREATE TABLE IF NOT EXISTS Habit (
+                    taskID TEXT PRIMARY KEY,
+                    userID TEXT,
+                    title TEXT NOT NULL,
+                    recurrence TEXT NOT NULL,
+                    isChecked INTEGER DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (userID) REFERENCES User(userID)
+                );
+            """
 
         var createTableStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
@@ -115,8 +116,7 @@ class DBManager {
             sqlite3_bind_text(insertStatement, 1, uuid, -1, SQLITE_TRANSIENT)
             sqlite3_bind_text(insertStatement, 2, (habit.userID as NSString).utf8String, -1, SQLITE_TRANSIENT)
             sqlite3_bind_text(insertStatement, 3, (habit.title as NSString).utf8String, -1, SQLITE_TRANSIENT)
-            let recurrenceString = try! JSONEncoder().encode(habit.recurrence).base64EncodedString()
-            sqlite3_bind_text(insertStatement, 4, recurrenceString, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(insertStatement, 4, (habit.recurrence as NSString).utf8String, -1, SQLITE_TRANSIENT)
 
             if sqlite3_step(insertStatement) == SQLITE_DONE {
                 print("Hábito criado com sucesso.")
@@ -131,7 +131,7 @@ class DBManager {
         sqlite3_finalize(insertStatement)
         return false
     }
-    
+
     // Ler todos os hábitos
     func getAllHabits() -> [Habit] {
         let queryStatementString = "SELECT * FROM Habit;"
@@ -143,11 +143,11 @@ class DBManager {
                 let ID = String(cString: sqlite3_column_text(queryStatement, 0))
                 let userID = String(cString: sqlite3_column_text(queryStatement, 1))
                 let title = String(cString: sqlite3_column_text(queryStatement, 2))
-                let recurrenceData = String(cString: sqlite3_column_text(queryStatement, 3))
-                let recurrence = sqlite3_column_int(queryStatement, 4)
+                let recurrence = String(cString: sqlite3_column_text(queryStatement, 3))
 
-                let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
+                let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence  )
                 habits.append(habit)
+                
                 
                 print(habits)
             }
@@ -198,8 +198,7 @@ class DBManager {
                 let ID = String(cString: sqlite3_column_text(queryStatement, 0))
                 let userID = String(cString: sqlite3_column_text(queryStatement, 1))
                 let title = String(cString: sqlite3_column_text(queryStatement, 2))
-                let recurrenceData = String(cString: sqlite3_column_text(queryStatement, 3))
-                let recurrence = sqlite3_column_int(queryStatement, 4)
+                let recurrence = String(cString: sqlite3_column_text(queryStatement, 3))
 
                 let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
                 habits.append(habit)

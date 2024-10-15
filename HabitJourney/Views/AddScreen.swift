@@ -75,20 +75,28 @@ struct AddScreen: View {
     }
 
     // Função de adição do hábito (DB)
-     func submitData() {
-     guard !inputString.isEmpty else {
-         
-         return
-     }
-         
-         let newHabit = Habit(userID: userID, title: inputString, recurrence: 1)
-     if habitStore.dbManager.insertHabit(habit: newHabit) {
-         
-         inputString = ""
-     } else {
-         
-     }
- }
+    func submitData() {
+        guard !inputString.isEmpty else {
+            return
+        }
+        
+        // Converte o array checkedDays em uma string de recorrência
+        let recurrenceString = checkedDays.map { $0 ? "1" : "0" }.joined()
+        
+        // Cria um novo hábito com a string de recorrência
+        let newHabit = Habit(userID: userID, title: inputString, recurrence: recurrenceString)
+        
+        if habitStore.dbManager.insertHabit(habit: newHabit) {
+            // Limpa os campos após a inserção
+            inputString = ""
+            checkedDays = Array(repeating: false, count: 7) // Reseta os checkboxes
+        } else {
+            // Trate o erro se necessário
+            print("Falha ao adicionar o hábito.")
+        }
+    }
+
+
 
 
     // Retorna os dias da semana com base no indice
