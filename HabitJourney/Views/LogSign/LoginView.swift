@@ -24,21 +24,18 @@ struct LoginView: View {
                     .environmentObject(HabitStore()).environmentObject(ProgressStore())
             } else {
                 
-                VStack{
+                ZStack{
+                    Image("login_background").resizable().ignoresSafeArea()
+                    
                     VStack {
                         
-                        Image(systemName: "person")
-                        
-                        Text("Esse é um aplicativo com SQLite")
-                            .padding(.bottom)
-                        
-                        CustomTextField(fieldModel: $emailField)
+                        CustomTextField(fieldModel: $emailField).foregroundColor(.white)
                             .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                             .onSubmit {
                                 emailField.onSubmitError()
                             }
                         
-                        CustomTextField(fieldModel: $passwordField)
+                        CustomTextField(fieldModel: $passwordField).foregroundColor(.white)
                             .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                             .onSubmit {
                                 passwordField.onSubmitError()
@@ -60,6 +57,9 @@ struct LoginView: View {
                                     if user.password == userPassword{
                                         
                                         userID = user.id
+                                        
+                                        print(db.getAllHabits())
+                                        
                                         isActive = true;
                                     } else {
                                         message = "E-mail ou senha incorretos"
@@ -72,14 +72,17 @@ struct LoginView: View {
                         if message != "" {
                             Text(message)
                         }
+                        
+                        Button("Não tem cadastro? Se Cadastre!"){
+                            show = true
+                        }
+                        
                     }//VStack
                     .padding(.top, 300)
                     
                     Spacer()
                     
-                    Button("Não tem cadastro? Se Cadastre!"){
-                        show = true
-                    }
+                    
                     .sheet(isPresented: $show){
                         //chamar a tela de cadastro
                         SignUpView(userName: "", userEmail: "", userPassword: "")

@@ -12,21 +12,36 @@ struct CustomTextField: View {
             VStack{
                 if fieldModel.fieldType.wrappedValue == FieldType.email || fieldModel.fieldType.wrappedValue == FieldType.name || fieldModel.fieldType.wrappedValue == FieldType.address{
                     TextField("", text: fieldModel.value)
+                        .frame(width: 350, height: 50)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                        )
+                        .multilineTextAlignment(.center)
                         .padding(.horizontal, 8)
+                        .foregroundColor(Color("AppColor/MarginSecondary"))
                     
                 
                 } else {
                     SecureField("", text: fieldModel.value)
+                        .frame(width: 350, height: 50)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                        )
+                        .multilineTextAlignment(.center)
                         .padding(.horizontal, 8)
+                        .foregroundColor(Color("AppColor/MarginSecondary"))
                 }
                 
             }
-            .background(Color.accentColor.opacity(0.2))
             .cornerRadius(10)
             
             if let error = fieldModel.error.wrappedValue{
                 Text(error)
-                    .foregroundColor(.red)
+                    .foregroundColor(.white)
                     .font(.system(size: 15))
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 0)

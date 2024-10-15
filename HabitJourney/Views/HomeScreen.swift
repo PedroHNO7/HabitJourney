@@ -42,15 +42,18 @@ struct HomeScreen: View {
 
                     // Calcular o índice correto para o dia atual
                     let calendar = Calendar.current
-                    let currentDay = calendar.component(.day, from: currentDate)
-                    let currentWeekday = calendar.component(.weekday, from: currentDate) - 1  // Dia da semana do dia atual
+                    let weekdayOffset = currentWeekdayOffset()
+                    
+                    ForEach(0..<weekdayOffset, id: \.self) { _ in
+                                            Color.clear.frame(width: 45, height: 45)
+                                        }
                     
                     // Dias do mês
                     ForEach(0..<28) { index in
-                        let date = calendar.date(byAdding: .day, value: index - currentDay, to: currentDate)!
+                        let date = calendar.date(byAdding: .day, value: index, to: currentDate)!
+                        let isToday = calendar.isDate(date, inSameDayAs: currentDate)
                         
-                        if index >= currentWeekday {
-                            if index - currentWeekday == currentDay - 1 {
+                        
                                 // Mostra o dia atual como um NavigationLink
                                 NavigationLink(destination: DayScreen(userID: $userID, selectedDate: date).environmentObject(habitStore)) {
                                     Text(dayFormatter.string(from: date)).bold()
@@ -59,31 +62,18 @@ struct HomeScreen: View {
                                         .foregroundColor(.white)
                                         .clipShape(Circle())
                                 }
-                            } else {
-                                // Mostra os outros dias do mês como NavigationLink
-                                NavigationLink(destination: DayScreen(userID: $userID, selectedDate: date).environmentObject(habitStore)) {
-                                    Text(dayFormatter.string(from: date)).bold()
-                                        .frame(width: 45, height: 45)
-                                        .background(progressColor(for: progressStore.percent))
-                                        .foregroundColor(.white)
-                                        .clipShape(Circle())
-                                }
                             }
-                        } else {
-                            // Espaço em branco para os dias antes do dia atual
-                            Color.clear.frame(width: 45, height: 45)
-                        }
-                    }
                 } // LazyVGrid
             }
         }
     }
-//
-    var currentWeekdayOffset: Int {
-        let calendar = Calendar.current
-        let weekday = calendar.component(.weekday, from: currentDate) - 1
-        return weekday
-    }
+
+    // Calcula os espaços em branco baseado no dia :D
+        func currentWeekdayOffset() -> Int {
+            let calendar = Calendar.current
+            let weekday = calendar.component(.weekday, from: currentDate)
+            return (weekday - 1) % 7
+        }
 
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

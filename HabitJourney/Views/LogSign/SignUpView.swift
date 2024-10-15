@@ -17,62 +17,58 @@ struct SignUpView: View {
     @State var passwordField: FieldModel = FieldModel(value: "", fieldType: .password)
     
     var body: some View {
-        VStack{
+        ZStack{
             
-            Image(systemName: "pencil")
-            Text("Cadastro").padding(.bottom)
+            Image("sign").resizable().ignoresSafeArea()
             
-            CustomTextField(fieldModel: $nameField)
-                .onSubmit {
-                    nameField.onSubmitError()
-                }
-            
-            
-            CustomTextField(fieldModel: $emailField)
-                .onSubmit {
-                    emailField.onSubmitError()
-                }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-            
-         
-           
-            CustomTextField(fieldModel: $passwordField)
-                .onSubmit {
-                    emailField.onSubmitError()
-                }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-            
-            Button("Cadastrar"){
+            VStack {
                 
-                let name = nameField.onValidate()
-                
-                let email = emailField.onValidate()
-                
-                let password = passwordField.onValidate()
-                
-                if name && email && password {
-                    let user = User(name: nameField.value, email: emailField.value, password: passwordField.value)
-                    
-                    if (db.insertUser(user: user)){
-                        show = true
-
-                        dismiss()
+                CustomTextField(fieldModel: $nameField).padding(.top, 300).foregroundColor(.white)
+                    .onSubmit {
+                        nameField.onSubmitError()
                     }
-                } else {
-                    return
-                }
-                   
-            }.buttonStyle(.borderedProminent)
-                .padding()
-        }
-        .padding()
-        .alert(isPresented: $show) {
-            Alert( title: Text("Sucesso"),
-                   message: Text("\(userName) Inserido com sucessso"),
-                   dismissButton: .default(Text("Ok"))
-                   )
-        }
+                
+                CustomTextField(fieldModel: $emailField).foregroundColor(.white)
+                    .onSubmit {
+                        emailField.onSubmitError()
+                    }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                
+                CustomTextField(fieldModel: $passwordField).foregroundColor(.white)
+                    .onSubmit {
+                        emailField.onSubmitError()
+                    }.autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                
+                Button("Cadastrar"){
+                    
+                    let name = nameField.onValidate()
+                    
+                    let email = emailField.onValidate()
+                    
+                    let password = passwordField.onValidate()
+                    
+                    if name && email && password {
+                        let user = User(name: nameField.value, email: emailField.value, password: passwordField.value)
+                        
+                        if (db.insertUser(user: user)){
+                            show = true
+                            
+                            dismiss()
+                        }
+                    } else {
+                        return
+                    }
+                    
+                }.buttonStyle(.borderedProminent)
+                    .padding()
+            }
+            .padding()
+            .alert(isPresented: $show) {
+                Alert( title: Text("Sucesso"),
+                       message: Text("\(userName) Inserido com sucessso"),
+                       dismissButton: .default(Text("Ok"))
+                )
+            }}
     }
-        
-    
 }
 
 #Preview {

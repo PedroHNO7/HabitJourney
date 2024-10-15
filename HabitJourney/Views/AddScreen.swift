@@ -39,6 +39,7 @@ struct AddScreen: View {
                 .accessibilityLabel("Insira o hábito a ser registrado")
                 .multilineTextAlignment(.center)
                 .padding(.vertical, 20)
+                
 
             // Título para seleção de recorrência
             Text("Qual a recorrência?")
