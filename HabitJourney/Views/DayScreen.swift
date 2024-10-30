@@ -10,32 +10,6 @@ struct DayScreen: View {
     @State private var checkedHabits: Set<String> = []
     var selectedDate: Date
 
-    var habitsForTheDay: [Habit] {
-        let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1  // O índice do dia da semana (0 a 6)
-        
-        return habitStore.habits.filter { habit in
-            // Verifica se a string de recorrência tem comprimento suficiente e se o dia correspondente está ativo
-            if habit.recurrence.count > weekday {
-                let isActiveForToday = habit.recurrence[habit.recurrence.index(habit.recurrence.startIndex, offsetBy: weekday)] == "1"
-                return isActiveForToday
-            }
-            return false
-        }
-    }
-
-
-    var completedHabitsCount: Int {
-        checkedHabits.intersection(Set(habitsForTheDay.map { $0.id })).count
-    }
-
-    var totalHabitsCount: Int {
-        habitsForTheDay.count
-    }
-
-    var percent: CGFloat {
-        totalHabitsCount > 0 ? CGFloat(completedHabitsCount) / CGFloat(totalHabitsCount) * 100 : 0
-    }
-
     var body: some View {
         VStack {
             headerSection
@@ -45,6 +19,7 @@ struct DayScreen: View {
         }
         .onAppear {
             loadCheckedHabits()
+            habitStore.loadHabits(for: userID)
         }
     }
 
@@ -68,11 +43,6 @@ struct DayScreen: View {
 
                 NavigationLink(destination: AddScreen( userID: $userID, selectedDate: selectedDate)) {
                     Image("Button")
-                }
-                
-                Button("TODOS") {
-                    db.getHabitsByUserID(userID: userID)
-                    
                 }
             }
             .padding(.trailing, 20)
@@ -120,7 +90,32 @@ struct DayScreen: View {
         }
     }
 
+    var habitsForTheDay: [Habit] {
+        let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1  // O índice do dia da semana (0 a 6)
+        
+        return habitStore.habits.filter { habit in
+            // Verifica se a string de recorrência tem comprimento suficiente e se o dia correspondente está ativo
+            if habit.recurrence.count > weekday {
+                let isActiveForToday = habit.recurrence[habit.recurrence.index(habit.recurrence.startIndex, offsetBy: weekday)] == "1"
+                return isActiveForToday
+            }
+            return false
+        }
+    }
 
+
+    var completedHabitsCount: Int {
+        checkedHabits.intersection(Set(habitsForTheDay.map { $0.id })).count
+    }
+
+    var totalHabitsCount: Int {
+        habitsForTheDay.count
+    }
+
+    var percent: CGFloat {
+        totalHabitsCount > 0 ? CGFloat(completedHabitsCount) / CGFloat(totalHabitsCount) * 100 : 0
+    }
+    
     private var footerSection: some View {
         HStack {
             Image("HabitJourney")

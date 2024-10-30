@@ -8,6 +8,6 @@ import Combine
      var dbManager = DBManager()
     
      func loadHabits(for id: String) {
-         self.habits = dbManager.getHabitsByUserID(userID: id)
+         self.habits = dbManager.getAllHabits()
      }
  }

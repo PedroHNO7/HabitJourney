@@ -4,10 +4,6 @@ import SQLite3
 class DBManager {
     let dataPath: String = "MyDB"
     var db: OpaquePointer?
-    
-    
-    var habits: [Habit] = []
-   
 
     let SQLITE_TRANSIENT = unsafeBitCast(OpaquePointer(bitPattern: -1), to: sqlite3_destructor_type.self)
 
@@ -193,6 +189,8 @@ class DBManager {
     func getHabitsByUserID(userID: String) -> [Habit] {
         let queryStatementString = "SELECT * FROM Habit WHERE userID = ?;"
         var queryStatement: OpaquePointer? = nil
+        
+        var habits: [Habit] = []
 
         if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
             sqlite3_bind_text(queryStatement, 1, (userID as NSString).utf8String, -1, SQLITE_TRANSIENT)
@@ -205,12 +203,7 @@ class DBManager {
 
                 let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
                 
-                
-                var habits: [Habit] = []
-                
                 habits.append(habit)
-                
-                print(habits)
             }
         } else {
             print("Falha ao executar SELECT para Habit.")
@@ -218,4 +211,6 @@ class DBManager {
         sqlite3_finalize(queryStatement)
         return habits
     }
+
+
 }

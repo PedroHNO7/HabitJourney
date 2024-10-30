@@ -59,7 +59,7 @@ struct AddScreen: View {
                         }
                     }
                 }
-            } // ScrollView para exibir os dias da semana com checkbox
+            }
 
             Button(action: {
                 self.submitData()
@@ -69,7 +69,7 @@ struct AddScreen: View {
                     .padding()
                     .background(Color("AppColor/MarginSecondary"))
                     .cornerRadius(8)
-            } // Botão para concluir a adição
+            }
             .padding(.top, 20)
         }
         .padding(.horizontal, 20)

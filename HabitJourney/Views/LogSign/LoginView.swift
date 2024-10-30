@@ -27,70 +27,75 @@ struct LoginView: View {
                 ZStack{
                     Image("login_background").resizable().ignoresSafeArea()
                     
-                    VStack {
-                        
-                        CustomTextField(fieldModel: $emailField).foregroundColor(.white)
-                            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                            .onSubmit {
-                                emailField.onSubmitError()
-                            }
-                        
-                        CustomTextField(fieldModel: $passwordField).foregroundColor(.white)
-                            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                            .onSubmit {
-                                passwordField.onSubmitError()
-                            }
-                        
-                        Button("Entrar"){
-                            var email = emailField.onValidate()
-                            
-                            var pass = passwordField.onValidate()
-                            
-                            if  email && pass{
-                                
-                                let users = db.logUser(email: emailField.value)
-                                message = "Não te encontrei :("
-                                
-                                for user in users{
-                                    userPassword = passwordField.value
-                                    
-                                    if user.password == userPassword{
-                                        
-                                        userID = user.id
-                                        
-                                        print(db.getAllHabits())
-                                        
-                                        isActive = true;
-                                    } else {
-                                        message = "E-mail ou senha incorretos"
-                                    }
-                                }
-                            }//if email
-                            
-                        }.buttonStyle(.borderedProminent)
-                        
-                        if message != "" {
-                            Text(message)
-                        }
-                        
-                        Button("Não tem cadastro? Se Cadastre!"){
-                            show = true
-                        }
-                        
-                    }//VStack
-                    .padding(.top, 300)
+                    inputSection
                     
                     Spacer()
                     
-                    
                     .sheet(isPresented: $show){
-                        //chamar a tela de cadastro
                         SignUpView(userName: "", userEmail: "", userPassword: "")
                     }
                 }
                 .padding()
             }
+        }.ignoresSafeArea()
+    }
+    
+    private var inputSection: some View {
+        VStack {
+            
+            CustomTextField(fieldModel: $emailField).foregroundColor(.white)
+                .autocapitalization(.none)
+                .onSubmit {
+                    emailField.onSubmitError()
+                }
+            
+            CustomTextField(fieldModel: $passwordField).foregroundColor(.white)
+                .autocapitalization(.none)
+                .onSubmit {
+                    passwordField.onSubmitError()
+                }
+            
+            Button("Entrar"){
+                let email = emailField.onValidate()
+                
+                let pass = passwordField.onValidate()
+                
+                if  email && pass{
+                    
+                    let users = db.logUser(email: emailField.value)
+                    message = "Não te encontrei :("
+                    
+                    for user in users{
+                        userPassword = passwordField.value
+                        
+                        if user.password == userPassword{
+                            
+                            userID = user.id
+                            
+                            print(db.getAllHabits())
+                            
+                            isActive = true;
+                        } else {
+                            message = "E-mail ou senha incorretos"
+                        }
+                    }
+                }
+                
+            }.foregroundColor(Color("AppColor/TaskMain"))
+                .frame(width: 320, height: 48)
+                .background(Color("AppColor/MarginSecondary"))
+                .cornerRadius(8)
+            
+            if message != "" {
+                Text(message)
+            }
+            
+            Button("Não tem cadastro? Se Cadastre!"){
+                show = true
+            }.foregroundColor(Color("AppColor/MarginSecondary")).padding()
+            
         }
+        .padding(.top, 300)
     }
 }
 

@@ -12,7 +12,7 @@ struct CustomTextField: View {
             VStack{
                 if fieldModel.fieldType.wrappedValue == FieldType.email || fieldModel.fieldType.wrappedValue == FieldType.name || fieldModel.fieldType.wrappedValue == FieldType.address{
                     TextField("", text: fieldModel.value)
-                        .frame(width: 350, height: 50)
+                        .frame(width: 320, height: 48)
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -25,7 +25,7 @@ struct CustomTextField: View {
                 
                 } else {
                     SecureField("", text: fieldModel.value)
-                        .frame(width: 350, height: 50)
+                        .frame(width: 320, height: 48)
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
