@@ -68,14 +68,43 @@ struct HomeScreen: View {
                     NavigationLink(destination: DayScreen(userID: $userID, selectedDate: date).environmentObject(habitStore)) {
                         Text(dayFormatter.string(from: date)).bold()
                             .frame(width: 45, height: 45)
-                            .background(progressColor(for: progressStore.percent))
+                            .background(progressColor(for: progressForDate(date)))
                             .foregroundColor(.white)
                             .clipShape(Circle())
                     }
                 }
             } // LazyVGrid
         }
+    
+    // Calcula o progresso da data especifica
+    func progressForDate(_ date: Date) -> CGFloat {
+        let habitsForDate = habitStore.habits.filter { habit in
+            let weekday = Calendar.current.component(.weekday, from: date) - 1
+            if habit.recurrence.count > weekday {
+                let isActiveForToday = habit.recurrence[habit.recurrence.index(habit.recurrence.startIndex, offsetBy: weekday)] == "1"
+                return isActiveForToday
+            }
+            return false
+        }
 
+        // Recuperando do UserDefault
+        let checkedHabits = loadCheckedHabits(for: date)
+
+        let completedCount = habitsForDate.filter { checkedHabits.contains($0.id) }.count
+        let totalCount = habitsForDate.count
+        
+        return totalCount > 0 ? CGFloat(completedCount) / CGFloat(totalCount) * 100 : 0
+    }
+
+    // Load checked habits for a specific date from UserDefaults
+    func loadCheckedHabits(for date: Date) -> Set<String> {
+        let key = dateFormatter.string(from: date)
+        if let checkedHabitsData = UserDefaults.standard.data(forKey: key),
+           let loadedCheckedHabits = try? JSONDecoder().decode([String].self, from: checkedHabitsData) {
+            return Set(loadedCheckedHabits)
+        }
+        return Set<String>()
+    }
         // Calcula os espaços em branco baseado no dia
         func currentWeekdayOffset() -> Int {
             let calendar = Calendar.current

@@ -28,10 +28,10 @@ struct LoginView: View {
                     
                     HStack {
                         Image("HabitJourney")
-                            .padding(.top, 80)
+                            .padding(.top, 64)
                         
                         Text("HabitJourney")
-                            .padding(.top, 80)
+                            .padding(.top, 64)
                             .font(.title)
                             .bold()
                             .foregroundColor(Color("AppColor/TaskMain"))

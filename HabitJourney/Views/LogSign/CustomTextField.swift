@@ -12,35 +12,37 @@ struct CustomTextField: View {
             VStack{
                 if fieldModel.fieldType.wrappedValue == FieldType.email || fieldModel.fieldType.wrappedValue == FieldType.name || fieldModel.fieldType.wrappedValue == FieldType.address{
                     TextField("", text: fieldModel.value)
-                        .frame(width: 320, height: 48)
+                        .frame(width: 320, height: 50)
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color("AppColor/TaskMain"), lineWidth: 4)
+                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
                         )
+                        .accessibilityLabel("Insira o hábito a ser registrado")
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("AppColor/MarginMain"))
+                        .padding(.vertical, 4)
                     
                 
                 } else {
                     SecureField("", text: fieldModel.value)
-                        .frame(width: 320, height: 48)
+                        .frame(width: 320, height: 50)
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color("AppColor/MarginMain"), lineWidth: 4)
+                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
                         )
+                        .accessibilityLabel("Insira o hábito a ser registrado")
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("AppColor/MarginMain"))
+                        .padding(.vertical, 4)
                 }
                 
             }
-            .cornerRadius(8)
             
             if let error = fieldModel.error.wrappedValue{
                 Text(error)
-                    .foregroundColor(Color("AppColor/TaskMain"))
-                    .font(.system(size: 15))
+                    .foregroundColor(Color("AppColor/MarginLogo"))
+                    .font(.system(size: 16))
+                    .bold()
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 0)
             }

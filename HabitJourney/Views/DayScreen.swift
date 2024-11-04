@@ -20,11 +20,6 @@ struct DayScreen: View {
         .onAppear {
             loadCheckedHabits()
             habitStore.loadHabits(for: userID)
-            
-            print("Habits for user \(userID):");
-            for habit in habitStore.habits where habit.userID == userID {
-                print("User ID: \(habit.userID), Habit ID: \(habit.id), Title: \(habit.title), Recurrence: \(habit.recurrence)")
-            }
         }
     }
 
@@ -153,14 +148,17 @@ struct DayScreen: View {
     }()
     
     func saveCheckedHabits() {
+        let key = dateFormatter.string(from: selectedDate) // Use the date as a key
         let checkedHabitsData = try? JSONEncoder().encode(Array(checkedHabits))
-        UserDefaults.standard.set(checkedHabitsData, forKey: "checkedHabits")
+        UserDefaults.standard.set(checkedHabitsData, forKey: key) // Save with the date key
     }
     
     func loadCheckedHabits() {
-        if let checkedHabitsData = UserDefaults.standard.data(forKey: "checkedHabits"),
+        let key = dateFormatter.string(from: selectedDate) // Use the date as a key
+        if let checkedHabitsData = UserDefaults.standard.data(forKey: key),
            let loadedCheckedHabits = try? JSONDecoder().decode([String].self, from: checkedHabitsData) {
             self.checkedHabits = Set(loadedCheckedHabits)
         }
     }
+
 }

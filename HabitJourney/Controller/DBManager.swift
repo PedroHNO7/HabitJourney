@@ -197,8 +197,6 @@ class DBManager {
 
                 let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
                 
-                print("Retrieved habits: \(habits)")
-                
                 habits.append(habit)
             }
         } else {
