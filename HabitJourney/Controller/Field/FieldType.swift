@@ -1,10 +1,3 @@
-//
-//  FieldType.swift
-//  BancoDeUsuarios
-//
-//  Created by coltec on 17/09/24.
-//
-
 import Foundation
 
 protocol FieldValidationProtocol{
@@ -16,7 +9,7 @@ enum FieldType: FieldValidationProtocol, Equatable{
     case name
     case email
     case password
-    case address
+    case habit
     
     
     var placeHolder: String{
@@ -27,8 +20,8 @@ enum FieldType: FieldValidationProtocol, Equatable{
             return "E-mail"
         case .password:
             return "Senha"
-        case .address:
-            return "Endereço"
+        case .habit:
+            return ""
         }
     }
     
@@ -40,8 +33,8 @@ enum FieldType: FieldValidationProtocol, Equatable{
             return emailValidate(value: value)
         case .password:
             return passwordValidate(value: value)
-        case .address:
-            return addressValidate(value: value)
+        case .habit:
+            return habitValidate(value: value)
         
         }
     }
@@ -65,8 +58,8 @@ enum FieldType: FieldValidationProtocol, Equatable{
         value.isEmpty ? "Digite sua senha" : nil
     }
     
-    private func addressValidate(value: String) -> String?{
-        value.isEmpty ? "Digite sua endereço" : nil
+    private func habitValidate(value: String) -> String?{
+        value.isEmpty ? "Digite o hábito" : nil
     }
     
     

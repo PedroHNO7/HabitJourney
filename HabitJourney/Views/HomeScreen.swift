@@ -96,7 +96,7 @@ struct HomeScreen: View {
         return totalCount > 0 ? CGFloat(completedCount) / CGFloat(totalCount) * 100 : 0
     }
 
-    // Load checked habits for a specific date from UserDefaults
+    // Carrega hábitos marcados de uma data especifica
     func loadCheckedHabits(for date: Date) -> Set<String> {
         let key = dateFormatter.string(from: date)
         if let checkedHabitsData = UserDefaults.standard.data(forKey: key),

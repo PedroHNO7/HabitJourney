@@ -1,18 +1,15 @@
-// Documento responsável pela criação de hábito
-
 import SwiftUI
 
 struct AddScreen: View {
     @EnvironmentObject var habitStore: HabitStore
-    
-    
     @Binding var userID: String
-    
-    @State private var inputString: String = ""
+    @State var habitField: FieldModel
+    @State private var alertMessage: String = ""
+    @State private var showAlert = false
     @State private var checkedDays: [Bool] = Array(repeating: false, count: 7)
 
     var selectedDate: Date
-
+    
     var body: some View {
         VStack {
             VStack {
@@ -24,22 +21,17 @@ struct AddScreen: View {
                     .font(.title)
                     .multilineTextAlignment(.center)
                     .bold()
-            } // VStack - Cabeçalho com a data selecionada e título da tela
+            } // Cabeçalho
             .padding(.bottom, 12)
 
-            // Texto de legenda mais o TextField
+            // Texto de legenda mais o CustomTextField
             Text("Qual é o hábito que deve ser registrado?")
-            TextField("Exercitar, ler livros, etc...", text: $inputString)
-                .frame(width: 350, height: 50)
-                .textFieldStyle(PlainTextFieldStyle())
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
-                )
-                .accessibilityLabel("Insira o hábito a ser registrado")
-                .multilineTextAlignment(.center)
-                .padding(.vertical, 20)
-                
+            CustomTextField(fieldModel: $habitField)
+                .foregroundColor(Color("AppColor/TaskMain"))
+                .autocapitalization(.none)
+                .onSubmit {
+                    habitField.onSubmitError()
+                }
 
             // Título para seleção de recorrência
             Text("Qual a recorrência?")
@@ -64,20 +56,39 @@ struct AddScreen: View {
             Button(action: {
                 self.submitData()
             }) {
-                Text("Submit")
+                Text("Adicionar")
                     .foregroundColor(Color("AppColor/TaskMain"))
-                    .padding()
-                    .background(Color("AppColor/MarginSecondary"))
-                    .cornerRadius(8)
+                        .frame(width: 320, height: 48)
+                        .background(Color("AppColor/MarginSecondary"))
+                        .cornerRadius(8)
             }
             .padding(.top, 20)
         }
         .padding(.horizontal, 20)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(""),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK")) {
+                    habitField.value = "" // Reseta o campo do hábito
+                    checkedDays = Array(repeating: false, count: 7) // Reseta os checkboxes
+                }
+            )
+        }
     }
 
     // Função de adição do hábito (DB)
     func submitData() {
-        guard !inputString.isEmpty else {
+        guard !habitField.value.isEmpty else {
+            alertMessage = "Por favor, insira um hábito válido."
+            showAlert = true
+            return
+        }
+
+        // Verifica se ao menos um checkbox está marcado
+        guard checkedDays.contains(true) else {
+            alertMessage = "Por favor, selecione ao menos um dia da semana para o hábito."
+            showAlert = true
             return
         }
         
@@ -85,22 +96,18 @@ struct AddScreen: View {
         let recurrenceString = checkedDays.map { $0 ? "1" : "0" }.joined()
         
         // Cria um novo hábito com a string de recorrência
-        let newHabit = Habit(userID: userID, title: inputString, recurrence: recurrenceString)
+        let newHabit = Habit(userID: userID, title: habitField.value, recurrence: recurrenceString)
         
         if habitStore.dbManager.insertHabit(habit: newHabit) {
-            // Limpa os campos após a inserção
-            inputString = ""
-            checkedDays = Array(repeating: false, count: 7) // Reseta os checkboxes
+            alertMessage = "Hábito criado com sucesso!"
+            showAlert = true
         } else {
-            // Trate o erro se necessário
-            print("Falha ao adicionar o hábito.")
+            alertMessage = "Falha ao adicionar o hábito. Tente novamente."
+            showAlert = true
         }
     }
 
-
-
-
-    // Retorna os dias da semana com base no indice
+    // Retorna os dias da semana com base no índice
     func weekday(for index: Int) -> String {
         switch index {
         case 0: return "Domingo"

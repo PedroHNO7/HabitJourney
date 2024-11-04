@@ -41,7 +41,7 @@ struct DayScreen: View {
 
                 Spacer()
 
-                NavigationLink(destination: AddScreen( userID: $userID, selectedDate: selectedDate)) {
+                NavigationLink(destination: AddScreen(userID: $userID, habitField: FieldModel(value: "", fieldType: .habit), selectedDate: selectedDate)) {
                     Image("Button")
                 }
             }

@@ -10,7 +10,7 @@ struct CustomTextField: View {
         VStack(alignment: .leading){
             Text(fieldModel.fieldType.wrappedValue.placeHolder)
             VStack{
-                if fieldModel.fieldType.wrappedValue == FieldType.email || fieldModel.fieldType.wrappedValue == FieldType.name || fieldModel.fieldType.wrappedValue == FieldType.address{
+                if fieldModel.fieldType.wrappedValue == FieldType.email || fieldModel.fieldType.wrappedValue == FieldType.habit || fieldModel.fieldType.wrappedValue == FieldType.name {
                     TextField("", text: fieldModel.value)
                         .frame(width: 320, height: 50)
                         .textFieldStyle(PlainTextFieldStyle())
@@ -18,7 +18,6 @@ struct CustomTextField: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
                         )
-                        .accessibilityLabel("Insira o hábito a ser registrado")
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 4)
                     

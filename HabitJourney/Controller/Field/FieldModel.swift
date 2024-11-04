@@ -1,11 +1,3 @@
-//
-//  FieldModel.swift
-//  BancoDeUsuarios
-//
-//  Created by coltec on 17/09/24.
-//
-
-
 import Foundation
 
 //modelo para validação de campos
