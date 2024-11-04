@@ -148,13 +148,13 @@ struct DayScreen: View {
     }()
     
     func saveCheckedHabits() {
-        let key = dateFormatter.string(from: selectedDate) // Use the date as a key
+        let key = dateFormatter.string(from: selectedDate)
         let checkedHabitsData = try? JSONEncoder().encode(Array(checkedHabits))
-        UserDefaults.standard.set(checkedHabitsData, forKey: key) // Save with the date key
+        UserDefaults.standard.set(checkedHabitsData, forKey: key)
     }
     
     func loadCheckedHabits() {
-        let key = dateFormatter.string(from: selectedDate) // Use the date as a key
+        let key = dateFormatter.string(from: selectedDate)
         if let checkedHabitsData = UserDefaults.standard.data(forKey: key),
            let loadedCheckedHabits = try? JSONDecoder().decode([String].self, from: checkedHabitsData) {
             self.checkedHabits = Set(loadedCheckedHabits)
