@@ -85,8 +85,6 @@ struct LoginView: View {
                             
                             userID = user.id
                             
-                            print(db.getAllHabits())
-                            
                             isActive = true;
                         } else {
                             message = "E-mail ou senha incorretos"

@@ -20,6 +20,11 @@ struct DayScreen: View {
         .onAppear {
             loadCheckedHabits()
             habitStore.loadHabits(for: userID)
+            
+            print("Habits for user \(userID):");
+            for habit in habitStore.habits where habit.userID == userID {
+                print("User ID: \(habit.userID), Habit ID: \(habit.id), Title: \(habit.title), Recurrence: \(habit.recurrence)")
+            }
         }
     }
 
@@ -51,16 +56,20 @@ struct DayScreen: View {
 
     private var progressBarSection: some View {
         HStack {
-            ProgressBar(width: 300, height: 20, percent: percent)
+            ProgressBar(width: 300, height: 20, percent: progressStore.percent)
                 .animation(.spring())
                 .padding(.vertical, 12)
                 .onAppear {
-                    self.progressStore.percent = self.percent
+                    updateProgress()
                 }
                 .onChange(of: percent) { newValue in
-                    self.progressStore.percent = newValue
+                    updateProgress()
                 }
         }
+    }
+    
+    private func updateProgress() {
+        progressStore.percent = totalHabitsCount > 0 ? CGFloat(completedHabitsCount) / CGFloat(totalHabitsCount) * 100 : 0
     }
 
     private var habitListSection: some View {
@@ -77,19 +86,34 @@ struct DayScreen: View {
                                     checkedHabits.remove(habit.id)
                                 }
                                 saveCheckedHabits()
-                                self.progressStore.percent = self.percent
+                                updateProgress()
                             }
                         ))
                         .frame(width: 45, height: 45)
                         
                         Text(habit.title)
+                            .strikethrough(checkedHabits.contains(habit.id), color: .gray)
+                            .opacity(checkedHabits.contains(habit.id) ? 0.5 : 1.0)
                             .multilineTextAlignment(.center)
+                            .animation(.easeInOut, value: checkedHabits.contains(habit.id))
                     }
                 }
             }
         }
     }
-
+    
+    private var footerSection: some View {
+        HStack {
+            Image("HabitJourney")
+            Text("HabitJourney")
+                .font(.title)
+                .bold()
+                .padding(.leading, 20)
+                .foregroundColor(Color("AppColor/TaskMain"))
+        }
+        .padding(.top, 80)
+    }
+    
     var habitsForTheDay: [Habit] {
         let weekday = Calendar.current.component(.weekday, from: selectedDate) - 1  // O índice do dia da semana (0 a 6)
         
@@ -103,7 +127,6 @@ struct DayScreen: View {
         }
     }
 
-
     var completedHabitsCount: Int {
         checkedHabits.intersection(Set(habitsForTheDay.map { $0.id })).count
     }
@@ -114,18 +137,6 @@ struct DayScreen: View {
 
     var percent: CGFloat {
         totalHabitsCount > 0 ? CGFloat(completedHabitsCount) / CGFloat(totalHabitsCount) * 100 : 0
-    }
-    
-    private var footerSection: some View {
-        HStack {
-            Image("HabitJourney")
-            Text("HabitJourney")
-                .font(.title)
-                .bold()
-                .padding(.leading, 20)
-                .foregroundColor(Color("AppColor/TaskMain"))
-        }
-        .padding(.top, 80)
     }
 
     let dateFormatter: DateFormatter = {

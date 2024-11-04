@@ -24,7 +24,6 @@ class DBManager {
             debugPrint("Não foi possível abrir o BD.")
             return nil
         } else {
-            print("BD criado com sucesso.")
             return db
         }
     }
@@ -43,7 +42,6 @@ class DBManager {
         var createTableStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
             if sqlite3_step(createTableStatement) == SQLITE_DONE {
-                print("Tabela User criada com sucesso.")
             } else {
                 print("Erro na criação da Tabela User.")
             }
@@ -61,8 +59,6 @@ class DBManager {
                     userID TEXT,
                     title TEXT NOT NULL,
                     recurrence TEXT NOT NULL,
-                    isChecked INTEGER DEFAULT 0,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (userID) REFERENCES User(userID)
                 );
             """
@@ -70,7 +66,7 @@ class DBManager {
         var createTableStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
             if sqlite3_step(createTableStatement) == SQLITE_DONE {
-                print("Tabela Habit criada com sucesso.")
+            
             } else {
                 print("Erro na criação da Tabela Habit.")
             }
@@ -93,7 +89,6 @@ class DBManager {
             sqlite3_bind_text(insertStatement, 4, (user.password as NSString).utf8String, -1, SQLITE_TRANSIENT)
 
             if sqlite3_step(insertStatement) == SQLITE_DONE {
-                print("Usuário criado com sucesso.")
                 sqlite3_finalize(insertStatement)
                 return true
             } else {
@@ -119,7 +114,6 @@ class DBManager {
             sqlite3_bind_text(insertStatement, 4, (habit.recurrence as NSString).utf8String, -1, SQLITE_TRANSIENT)
 
             if sqlite3_step(insertStatement) == SQLITE_DONE {
-                print("Hábito criado com sucesso.")
                 sqlite3_finalize(insertStatement)
                 return true
             } else {
@@ -203,6 +197,8 @@ class DBManager {
 
                 let habit = Habit(id: ID, userID: userID, title: title, recurrence: recurrence)
                 
+                print("Retrieved habits: \(habits)")
+                
                 habits.append(habit)
             }
         } else {
@@ -211,6 +207,4 @@ class DBManager {
         sqlite3_finalize(queryStatement)
         return habits
     }
-
-
 }
