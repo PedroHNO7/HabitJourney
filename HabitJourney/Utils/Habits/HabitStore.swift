@@ -7,7 +7,7 @@ import Combine
      @Published var habits: [Habit] = []
      var dbManager = DBManager()
     
-     func loadHabits(for id: String) {
-         self.habits = dbManager.getAllHabits()
+     func loadHabits(for userID: String) {
+         self.habits = dbManager.getHabitsByUserID(userID: userID)
      }
  }

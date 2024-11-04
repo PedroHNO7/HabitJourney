@@ -24,18 +24,26 @@ struct LoginView: View {
                     .environmentObject(HabitStore()).environmentObject(ProgressStore())
             } else {
                 
-                ZStack{
-                    Image("login_background").resizable().ignoresSafeArea()
+                VStack {
+                    
+                    HStack {
+                        Image("HabitJourney")
+                            .padding(.top, 80)
+                        
+                        Text("HabitJourney")
+                            .padding(.top, 80)
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color("AppColor/TaskMain"))
+                    }
+                    .padding(.bottom, 30)
                     
                     inputSection
-                    
-                    Spacer()
                     
                     .sheet(isPresented: $show){
                         SignUpView(userName: "", userEmail: "", userPassword: "")
                     }
                 }
-                .padding()
             }
         }.ignoresSafeArea()
     }
@@ -43,13 +51,18 @@ struct LoginView: View {
     private var inputSection: some View {
         VStack {
             
-            CustomTextField(fieldModel: $emailField).foregroundColor(.white)
+            Text("Entrar")
+                .font(.title)
+                .bold()
+                .foregroundColor(Color("AppColor/TaskMain"))
+            
+            CustomTextField(fieldModel: $emailField).foregroundColor(Color("AppColor/TaskMain"))
                 .autocapitalization(.none)
                 .onSubmit {
                     emailField.onSubmitError()
                 }
             
-            CustomTextField(fieldModel: $passwordField).foregroundColor(.white)
+            CustomTextField(fieldModel: $passwordField).foregroundColor(Color("AppColor/TaskMain"))
                 .autocapitalization(.none)
                 .onSubmit {
                     passwordField.onSubmitError()
@@ -92,10 +105,10 @@ struct LoginView: View {
             
             Button("Não tem cadastro? Se Cadastre!"){
                 show = true
-            }.foregroundColor(Color("AppColor/MarginSecondary")).padding()
+            }.foregroundColor(Color("AppColor/TaskMain")).padding()
             
         }
-        .padding(.top, 300)
+        .padding()
     }
 }
 

@@ -17,12 +17,21 @@ struct SignUpView: View {
     @State var passwordField: FieldModel = FieldModel(value: "", fieldType: .password)
     
     var body: some View {
-        ZStack{
-            
-            Image("sign").resizable().ignoresSafeArea()
+        VStack {
+
+            HStack {
+                Image("HabitJourney")
+                    .padding(.top, 80)
+                
+                Text("HabitJourney")
+                    .padding(.top, 80)
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(Color("AppColor/TaskMain"))
+            }
+            .padding()
             
             inputSection
-         
         }
     }
     
@@ -30,17 +39,23 @@ struct SignUpView: View {
         
         VStack {
             
-            CustomTextField(fieldModel: $nameField).padding(.top, 300).foregroundColor(.white)
+            Text("Registrar")
+                .font(.title)
+                .bold()
+                .foregroundColor(Color("AppColor/TaskMain"))
+            
+            CustomTextField(fieldModel: $nameField)
+                .foregroundColor(Color("AppColor/TaskMain"))
                 .onSubmit {
                     nameField.onSubmitError()
                 }
             
-            CustomTextField(fieldModel: $emailField).foregroundColor(.white)
+            CustomTextField(fieldModel: $emailField).foregroundColor(Color("AppColor/TaskMain"))
                 .onSubmit {
                     emailField.onSubmitError()
                 }.autocapitalization(.none)
             
-            CustomTextField(fieldModel: $passwordField).foregroundColor(.white)
+            CustomTextField(fieldModel: $passwordField).foregroundColor(Color("AppColor/TaskMain"))
                 .onSubmit {
                     emailField.onSubmitError()
                 }.autocapitalization(.none)
@@ -70,8 +85,6 @@ struct SignUpView: View {
                 .background(Color("AppColor/MarginSecondary"))
                 .cornerRadius(8)
         }
-        .ignoresSafeArea()
-        .padding()
         .alert(isPresented: $show) {
             Alert( title: Text("Sucesso"),
                    message: Text("\(userName) Inserido com sucessso"),

@@ -15,12 +15,11 @@ struct CustomTextField: View {
                         .frame(width: 320, height: 48)
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("AppColor/TaskMain"), lineWidth: 4)
                         )
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 8)
-                        .foregroundColor(Color("AppColor/MarginSecondary"))
+                        .foregroundColor(Color("AppColor/MarginMain"))
                     
                 
                 } else {
@@ -28,20 +27,19 @@ struct CustomTextField: View {
                         .frame(width: 320, height: 48)
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("AppColor/MarginMain"), lineWidth: 4)
                         )
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 8)
-                        .foregroundColor(Color("AppColor/MarginSecondary"))
+                        .foregroundColor(Color("AppColor/MarginMain"))
                 }
                 
             }
-            .cornerRadius(10)
+            .cornerRadius(8)
             
             if let error = fieldModel.error.wrappedValue{
                 Text(error)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("AppColor/TaskMain"))
                     .font(.system(size: 15))
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 0)
