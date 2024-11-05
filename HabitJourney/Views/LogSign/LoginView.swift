@@ -4,6 +4,8 @@ struct LoginView: View {
     
     let db = DBManager()
     
+    @State private var showSignUpView = false
+    
     @State var userEmail: String
     @State var userPassword: String
     @State var message: String = ""
@@ -43,8 +45,16 @@ struct LoginView: View {
                     .sheet(isPresented: $show){
                         SignUpView(userName: "", userEmail: "", userPassword: "")
                     }
+                }.onAppear {
+                    showSignUpView = false
                 }
+                
+                
             }
+        }.fullScreenCover(isPresented: $showSignUpView) {
+            SignUpView(userName: "", userEmail: "", userPassword: "")
+            
+            
         }.ignoresSafeArea()
     }
     
