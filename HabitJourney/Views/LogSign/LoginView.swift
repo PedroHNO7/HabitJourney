@@ -114,7 +114,10 @@ struct LoginView: View {
                             
                             userID = user.id
                             
-                            isActive = true;
+                            isActive = true
+                            
+                            isUserLoggedIn = true
+                            
                         } else {
                             message = "E-mail ou senha incorretos"
                         }

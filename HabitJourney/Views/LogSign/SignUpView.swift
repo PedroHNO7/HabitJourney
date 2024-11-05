@@ -13,7 +13,6 @@ struct SignUpView: View {
     @State var show: Bool = false
     
     @State var userID: String = ""
-
     
     @State var nameField: FieldModel = FieldModel(value: "", fieldType: .name)
     @State var emailField: FieldModel = FieldModel(value: "", fieldType: .email)

@@ -1,10 +1,3 @@
-//
-//  AuthService.swift
-//  HabitJourney
-//
-//  Created by coltec on 05/11/24.
-//
-
 import Foundation
 import FirebaseCore
 import FirebaseAuth
@@ -58,7 +51,12 @@ class AuthService: NSObject, ObservableObject {
     // Faz o logout do Google Sign-In se estiver usando Single-sign-on
     func googleSignOut() {
         GIDSignIn.sharedInstance.signOut()
-        print("Logout realizado com Google")
+        do {
+            try Auth.auth().signOut()
+            print("Logout realizado com Google e Firebase")
+        } catch let error {
+            print("Erro ao fazer logout do Firebase: \(error.localizedDescription)")
+        }
     }
     
     func isUserLoggedIn() -> Bool {
@@ -72,12 +70,4 @@ class AuthService: NSObject, ObservableObject {
              return false
          }
      }
-    
-    func regularCreateAccount(email: String, password: String){
-        //TODO
-    }
-    
-    func regularSignOut(){
-        //TODO
-    }
 }

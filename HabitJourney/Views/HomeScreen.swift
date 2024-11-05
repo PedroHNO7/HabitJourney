@@ -5,6 +5,13 @@ struct HomeScreen: View {
     
     @EnvironmentObject var habitStore: HabitStore
     @EnvironmentObject var progressStore: ProgressStore
+    
+    @ObservedObject var authService: AuthService = AuthService()
+    
+    @State private var showSignUpView = false
+    @State private var isUserLoggedIn = false
+    
+    @Environment(\.dismiss) var dismiss
 
     @Binding var userID: String
     
@@ -14,12 +21,33 @@ struct HomeScreen: View {
                 headerSection
                 dateSection
                 dayGridSection
+            }.onAppear{
+                isUserLoggedIn = authService.isUserLoggedIn()
             }
-            .padding()
         }
     }
     
     private var headerSection: some View {
+        
+        VStack(alignment: .leading) {
+            
+            HStack {
+                Button{
+                     authService.googleSignOut()
+                     isUserLoggedIn = false
+                   
+                    showSignUpView = true
+                    
+                } label: {
+                    HStack{
+                        Image(systemName: "rectangle.portrait.and.arrow.right").resizable().frame(width: 40, height: 40).tint(Color("AppColor/TaskMain"))
+                        Text("Sair").font(.subheadline)
+                            .bold()
+                            .foregroundColor(Color("AppColor/TaskMain"))
+                    }
+                }
+            }.padding(.bottom, 120)
+        
             HStack {
                 Image("HabitJourney")
                 Text("HabitJourney")
@@ -29,6 +57,7 @@ struct HomeScreen: View {
             }
             .padding(.bottom, 30)
         }
+    }
         
         private var dateSection: some View {
             HStack {
