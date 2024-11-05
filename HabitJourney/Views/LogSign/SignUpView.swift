@@ -7,12 +7,13 @@ struct SignUpView: View {
     @State var userName: String
     @State var userEmail: String
     @State var userPassword: String
-
-    @ObservedObject var authService: AuthService = AuthService()
     
     @Environment(\.dismiss) var dismiss
     
     @State var show: Bool = false
+    
+    @State var userID: String = ""
+
     
     @State var nameField: FieldModel = FieldModel(value: "", fieldType: .name)
     @State var emailField: FieldModel = FieldModel(value: "", fieldType: .email)
@@ -32,27 +33,12 @@ struct SignUpView: View {
                     .foregroundColor(Color("AppColor/TaskMain"))
             }
             
-            Button{
-                print("Cliquei para o Login com Google")
-                if authService.googleSignIn(){
-                    dismiss()
-                }
-            } label: {
-                HStack{
-                    Image("GoogleButton")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 0)
-                    Text("Criar com Google")
-                    
-                    
-                }
-            }
-            
+           
             .padding()
             
             inputSection
         }
+
     }
     
     private var inputSection: some View {

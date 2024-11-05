@@ -11,12 +11,17 @@ struct LoginView: View {
     @State var message: String = ""
     @State var show = false
     
+    @Environment(\.dismiss) var dismiss
+    
     @State var userID: String = ""
     
     @State var emailField: FieldModel
     @State var passwordField: FieldModel
     
     @State var isActive: Bool = false;
+    
+    @State private var isUserLoggedIn = false
+    @ObservedObject var authService: AuthService = AuthService()
     
     var body: some View {
         
@@ -40,15 +45,29 @@ struct LoginView: View {
                     }
                     .padding(.bottom, 30)
                     
+                    Button{
+                        print("Cliquei para o Login com Google")
+                        if authService.googleSignIn(){
+                            dismiss()
+                        }
+                    } label: {
+                        HStack{
+                            Text("Criar com Google")
+                        }
+                    }
+                    
                     inputSection
                     
                     .sheet(isPresented: $show){
                         SignUpView(userName: "", userEmail: "", userPassword: "")
                     }
                 }.onAppear {
-                    showSignUpView = false
+                    isUserLoggedIn = authService.isUserLoggedIn()
+                    
+                    if isUserLoggedIn {
+                        self.isActive = true
+                    }
                 }
-                
                 
             }
         }.fullScreenCover(isPresented: $showSignUpView) {
