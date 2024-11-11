@@ -6,7 +6,7 @@ struct HomeScreen: View {
     @EnvironmentObject var habitStore: HabitStore
     @EnvironmentObject var progressStore: ProgressStore
     
-    @ObservedObject var authService: AuthService = AuthService()
+    @StateObject var authService: AuthService = AuthService.shared
     
     @State private var showSignUpView = false
     @State private var isUserLoggedIn = false

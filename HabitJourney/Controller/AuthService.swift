@@ -4,6 +4,11 @@ import FirebaseAuth
 import GoogleSignIn
 
 class AuthService: NSObject, ObservableObject {
+    
+    @Published var isUserLogged: Bool = false
+    
+    static let shared = AuthService()
+    private override init() {} //padrão singleton
   
     func googleSignIn() -> Bool {
         // Verifica se o clientID do Firebase foi configurado corretamente
@@ -41,6 +46,7 @@ class AuthService: NSObject, ObservableObject {
                     print(e.localizedDescription)
                 } else {
                     print("Login realizado com Google")
+                    self.isUserLogged = true
                     return
                 }
             }
@@ -54,6 +60,7 @@ class AuthService: NSObject, ObservableObject {
         do {
             try Auth.auth().signOut()
             print("Logout realizado com Google e Firebase")
+            self.isUserLogged = false
         } catch let error {
             print("Erro ao fazer logout do Firebase: \(error.localizedDescription)")
         }
@@ -63,10 +70,12 @@ class AuthService: NSObject, ObservableObject {
          if let currentUser = Auth.auth().currentUser {
              // O usuário está logado
              print("Usuário já está logado: \(currentUser.email ?? "sem email")")
+             self.isUserLogged = true
              return true
          } else {
              // Nenhum usuário logado
              print("Nenhum usuário está logado")
+             self.isUserLogged = false
              return false
          }
      }

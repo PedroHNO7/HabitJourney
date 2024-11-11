@@ -21,60 +21,69 @@ struct LoginView: View {
     @State var isActive: Bool = false;
     
     @State private var isUserLoggedIn = false
-    @ObservedObject var authService: AuthService = AuthService()
+    
+    //Aqui estou usando o padrão singleton, então tem somente uma instância
+    @StateObject var authService: AuthService = AuthService.shared
     
     var body: some View {
         
-        ZStack {
-            if self.isActive {
-                HomeScreen(userID: $userID)
-                    .environmentObject(HabitStore()).environmentObject(ProgressStore())
-            } else {
-                
-                VStack {
+            ZStack {
+                if authService.isUserLogged{
+                //if self.isActive {
+                    HomeScreen(userID: $userID)
+                        .environmentObject(HabitStore()).environmentObject(ProgressStore())
+                } else {
                     
-                    HStack {
-                        Image("HabitJourney")
-                            .padding(.top, 64)
+                    VStack {
                         
-                        Text("HabitJourney")
-                            .padding(.top, 64)
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(Color("AppColor/TaskMain"))
-                    }
-                    .padding(.bottom, 30)
-                    
-                    Button{
-                        print("Cliquei para o Login com Google")
-                        if authService.googleSignIn(){
-                            dismiss()
+                        HStack {
+                            Image("HabitJourney")
+                                .padding(.top, 64)
+                            
+                            Text("HabitJourney")
+                                .padding(.top, 64)
+                                .font(.title)
+                                .bold()
+                                .foregroundColor(Color("AppColor/TaskMain"))
                         }
-                    } label: {
-                        HStack{
-                            Text("Criar com Google")
+                        .padding(.bottom, 30)
+                        
+                        Button{
+                            print("Cliquei para o Login com Google")
+                            if authService.googleSignIn(){
+                                
+//                                if authService.isUserLoggedIn() {
+//                                    isActive = true
+//                                }
+                                dismiss()
+                            }
+                        } label: {
+                            HStack{
+                                Text("Criar com Google")
+                            }
+                        }
+                        inputSection
+                            .sheet(isPresented: $show){
+                                SignUpView(userName: "", userEmail: "", userPassword: "")
+                            }
+                    }//VStack
+                    .onAppear {
+                        isUserLoggedIn = authService.isUserLoggedIn()
+                        
+                        if isUserLoggedIn {
+                            self.isActive = true
                         }
                     }
                     
-                    inputSection
-                    
-                    .sheet(isPresented: $show){
-                        SignUpView(userName: "", userEmail: "", userPassword: "")
-                    }
-                }.onAppear {
-                    isUserLoggedIn = authService.isUserLoggedIn()
-                    
-                    if isUserLoggedIn {
-                        self.isActive = true
-                    }
-                }
+                   
+                } //else
+            }//ZStack
+            .fullScreenCover(isPresented: $showSignUpView) {
+                SignUpView(userName: "", userEmail: "", userPassword: "")
                 
-            }
-        }.fullScreenCover(isPresented: $showSignUpView) {
-            SignUpView(userName: "", userEmail: "", userPassword: "")
-            
-            
-        }.ignoresSafeArea()
+                
+            }.ignoresSafeArea()
+
     }
     
     private var inputSection: some View {

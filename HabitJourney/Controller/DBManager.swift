@@ -205,4 +205,26 @@ class DBManager {
         sqlite3_finalize(queryStatement)
         return habits
     }
+    
+    func getUserByEmail(email: String) -> User? {
+        let queryStatementString = "SELECT * FROM User WHERE email = ?;"
+        var queryStatement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(queryStatement, 1, (email as NSString).utf8String, -1, SQLITE_TRANSIENT)
+            
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+                let id = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                let name = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                let email = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                let password = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                
+                sqlite3_finalize(queryStatement)
+                return User(id: id, name: name, email: email, password: password)
+            }
+        }
+        
+        sqlite3_finalize(queryStatement)
+        return nil // User not found
+    }
 }
