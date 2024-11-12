@@ -18,8 +18,8 @@ struct DayScreen: View {
             footerSection
         }
         .onAppear {
-            loadCheckedHabits()
             habitStore.loadHabits(for: userID)
+            loadCheckedHabits()
         }
     }
 

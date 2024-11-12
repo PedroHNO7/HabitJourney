@@ -16,7 +16,7 @@ struct CustomTextField: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 4)
                         )
                         .multilineTextAlignment(.center)
                         .padding(.vertical, 4)
@@ -28,7 +28,7 @@ struct CustomTextField: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color("AppColor/MarginSecondary"), lineWidth: 5)
+                                .stroke(Color("AppColor/MarginSecondary"), lineWidth:4)
                         )
                         .accessibilityLabel("Insira o hábito a ser registrado")
                         .multilineTextAlignment(.center)

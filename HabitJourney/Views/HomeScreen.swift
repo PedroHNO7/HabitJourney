@@ -9,7 +9,6 @@ struct HomeScreen: View {
     @StateObject var authService: AuthService = AuthService.shared
     
     @State private var showSignUpView = false
-    @State private var isUserLoggedIn = false
     
     @Environment(\.dismiss) var dismiss
 
@@ -21,8 +20,6 @@ struct HomeScreen: View {
                 headerSection
                 dateSection
                 dayGridSection
-            }.onAppear{
-                isUserLoggedIn = authService.isUserLoggedIn()
             }
         }
     }
@@ -34,7 +31,6 @@ struct HomeScreen: View {
             HStack {
                 Button{
                      authService.googleSignOut()
-                     isUserLoggedIn = false
                    
                     showSignUpView = true
                     

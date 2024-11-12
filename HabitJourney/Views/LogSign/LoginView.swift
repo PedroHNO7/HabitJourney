@@ -28,7 +28,8 @@ struct LoginView: View {
     var body: some View {
         
             ZStack {
-                if authService.isUserLogged{
+                if authService.isUserLogged || self.isActive{
+
                     HomeScreen(userID: $userID)
                         .environmentObject(HabitStore()).environmentObject(ProgressStore())
                 } else {
@@ -54,6 +55,7 @@ struct LoginView: View {
                                 if authService.isUserLoggedIn() {
                                     isActive = true
                                 }
+                                
                                 dismiss()
                             }
                         } label: {
@@ -122,7 +124,10 @@ struct LoginView: View {
                 if  email && pass{
                     
                     let users = db.logUser(email: emailField.value)
-                    message = "Não te encontrei :("
+                    
+
+                        message = "Não te encontrei :("
+
                     
                     for user in users{
                         userPassword = passwordField.value
@@ -133,7 +138,9 @@ struct LoginView: View {
                             
                             isActive = true
                             
-                            isUserLoggedIn = true
+                            authService.isUserLogged = true;
+                            
+                            
                             
                         } else {
                             message = "E-mail ou senha incorretos"

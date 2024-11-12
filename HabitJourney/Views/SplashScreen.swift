@@ -10,8 +10,11 @@ struct SplashScreen: View {
         
         ZStack {
             if self.isActive {
+               
+                Color("AppColor/BackgroundColor")
                 
                 LoginView(userEmail: "", userPassword: "", emailField: FieldModel(value: "", fieldType: .email), passwordField: FieldModel(value: "", fieldType: .password))
+                
             } else {
                 VStack {
                     Image("HabitJourney")
@@ -32,7 +35,7 @@ struct SplashScreen: View {
                     }
                 }
             }
-        }
+        }.ignoresSafeArea()
     }
 }
 
