@@ -29,7 +29,6 @@ struct LoginView: View {
         
             ZStack {
                 if authService.isUserLogged{
-                //if self.isActive {
                     HomeScreen(userID: $userID)
                         .environmentObject(HabitStore()).environmentObject(ProgressStore())
                 } else {
@@ -52,16 +51,25 @@ struct LoginView: View {
                             print("Cliquei para o Login com Google")
                             if authService.googleSignIn(){
                                 
-//                                if authService.isUserLoggedIn() {
-//                                    isActive = true
-//                                }
+                                if authService.isUserLoggedIn() {
+                                    isActive = true
+                                }
                                 dismiss()
                             }
                         } label: {
                             HStack{
-                                Text("Criar com Google")
+                                
+                                Image("Google")
+                                    .resizable()
+                                    .frame(width: 48, height: 48)
+                                Text("Entrar com Google")
                             }
-                        }
+                        }.foregroundColor(Color("AppColor/TaskMain"))
+                            .frame(width: 240, height: 48)
+                            .background(Color("AppColor/MarginSecondary"))
+                            .cornerRadius(8)
+                        
+                        
                         inputSection
                             .sheet(isPresented: $show){
                                 SignUpView(userName: "", userEmail: "", userPassword: "")
