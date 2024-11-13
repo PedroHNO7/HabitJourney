@@ -28,7 +28,7 @@ struct LoginView: View {
     var body: some View {
         
             ZStack {
-                if authService.isUserLogged || self.isActive{
+                if authService.isUserLogged || self.isActive == true {
 
                     HomeScreen(userID: $userID)
                         .environmentObject(HabitStore()).environmentObject(ProgressStore())
@@ -80,8 +80,10 @@ struct LoginView: View {
                     .onAppear {
                         isUserLoggedIn = authService.isUserLoggedIn()
                         
-                        if isUserLoggedIn {
+                        if UserDefaults.standard.bool(forKey: "isLoggedWithForm") || isUserLoggedIn {
+                            
                             self.isActive = true
+                            
                         }
                     }
                     
@@ -138,7 +140,8 @@ struct LoginView: View {
                             
                             isActive = true
                             
-                            authService.isUserLogged = true;
+                            UserDefaults.standard.set(true, forKey: "isLoggedWithForm")
+                            UserDefaults.standard.set(userID, forKey: "userID")
                             
                             
                             
