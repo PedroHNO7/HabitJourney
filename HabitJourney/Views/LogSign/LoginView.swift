@@ -78,12 +78,10 @@ struct LoginView: View {
                             }
                     }//VStack
                     .onAppear {
-                        isUserLoggedIn = authService.isUserLoggedIn()
-                        
-                        if UserDefaults.standard.bool(forKey: "isLoggedWithForm") || isUserLoggedIn {
-                            
+                        if UserDefaults.standard.bool(forKey: "isLoggedWithForm") || authService.isUserLoggedIn() {
                             self.isActive = true
-                            
+                        } else {
+                            self.isActive = false
                         }
                     }
                     

@@ -10,6 +10,8 @@ struct HomeScreen: View {
     
     @State private var showSignUpView = false
     
+    @State var isActive: Bool = false;
+    
     @Environment(\.dismiss) var dismiss
 
     @Binding var userID: String
@@ -30,9 +32,14 @@ struct HomeScreen: View {
             
             HStack {
                 Button{
-                     authService.googleSignOut()
-                   
-                    showSignUpView = true
+                    if UserDefaults.standard.bool(forKey: "isLoggedWithForm") {
+                        UserDefaults.standard.removeObject(forKey: "isLoggedWithForm")
+                        UserDefaults.standard.removeObject(forKey: "userID")
+                        authService.defaultSignOut()
+                    } else if authService.isUserLogged {
+                        authService.googleSignOut()
+                    }
+                    isActive = false
                     
                 } label: {
                     HStack{

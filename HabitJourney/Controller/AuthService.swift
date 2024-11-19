@@ -87,5 +87,3 @@ class AuthService: NSObject, ObservableObject {
     
     
 }
-
-
