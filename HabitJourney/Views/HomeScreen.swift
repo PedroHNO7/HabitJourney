@@ -10,11 +10,11 @@ struct HomeScreen: View {
     
     @State private var showSignUpView = false
     
-    @State var isActive: Bool = false;
-    
     @Environment(\.dismiss) var dismiss
 
     @Binding var userID: String
+    
+    @State var isActive: Bool = false
     
     var body: some View {
         NavigationView {
@@ -24,6 +24,7 @@ struct HomeScreen: View {
                 dayGridSection
             }
         }
+        
     }
     
     private var headerSection: some View {
@@ -31,15 +32,18 @@ struct HomeScreen: View {
         VStack(alignment: .leading) {
             
             HStack {
-                Button{
-                    if UserDefaults.standard.bool(forKey: "isLoggedWithForm") {
-                        UserDefaults.standard.removeObject(forKey: "isLoggedWithForm")
-                        UserDefaults.standard.removeObject(forKey: "userID")
-                        authService.defaultSignOut()
-                    } else if authService.isUserLogged {
-                        authService.googleSignOut()
-                    }
-                    isActive = false
+                
+                    Button{
+                        if UserDefaults.standard.bool(forKey: "isLoggedWithForm") {
+                            UserDefaults.standard.removeObject(forKey: "isLoggedWithForm")
+                            UserDefaults.standard.removeObject(forKey: "userID")
+                            authService.defaultSignOut()
+                        } else if authService.isUserLogged {
+                            authService.googleSignOut()
+                        }
+                        isActive = false
+                        
+            
                     
                 } label: {
                     HStack{
@@ -105,7 +109,12 @@ struct HomeScreen: View {
                             .clipShape(Circle())
                     }
                 }
-            } // LazyVGrid
+            }// LazyVGrid
+            
+            .onAppear {
+                habitStore.loadHabits(for: userID)
+                progressStore.updateProgress(habits: habitStore.habits, checkedHabits: loadCheckedHabits(for: currentDate))
+            }
         }
     
     // Calcula o progresso da data especifica
