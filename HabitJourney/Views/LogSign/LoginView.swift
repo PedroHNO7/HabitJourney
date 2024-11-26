@@ -39,12 +39,16 @@ struct LoginView: View {
                         HStack {
                             Image("HabitJourney")
                                 .padding(.top, 64)
+                                .accessibility(label: Text("Habit Journey imagem"))
+                                
                             
                             Text("HabitJourney")
                                 .padding(.top, 64)
                                 .font(.title)
                                 .bold()
                                 .foregroundColor(Color("AppColor/TaskMain"))
+                                .accessibility(label: Text("Habit Journey"))
+                                .accessibility(hint: Text("Tela de login"))
                         }
                         .padding(.bottom, 30)
                         
@@ -65,6 +69,8 @@ struct LoginView: View {
                                     .resizable()
                                     .frame(width: 48, height: 48)
                                 Text("Entrar com Google")
+                                    .accessibility(label: Text("Entrar com Google"))
+                                    .accessibility(hint: Text("Pressione para realizar o login com o Google"))
                             }
                         }.foregroundColor(Color("AppColor/TaskMain"))
                             .frame(width: 240, height: 48)
@@ -103,18 +109,20 @@ struct LoginView: View {
                 .font(.title)
                 .bold()
                 .foregroundColor(Color("AppColor/TaskMain"))
+                .accessibility(label: Text("Entrar"))
+                
             
             CustomTextField(fieldModel: $emailField).foregroundColor(Color("AppColor/TaskMain"))
                 .autocapitalization(.none)
                 .onSubmit {
                     emailField.onSubmitError()
-                }
+                }.accessibility(label: Text("Digite seu email já cadastrado"))
             
             CustomTextField(fieldModel: $passwordField).foregroundColor(Color("AppColor/TaskMain"))
                 .autocapitalization(.none)
                 .onSubmit {
                     passwordField.onSubmitError()
-                }
+                }.accessibility(label: Text("Digite sua senha já cadastrada"))
             
             Button("Entrar"){
                 let email = emailField.onValidate()
@@ -145,6 +153,7 @@ struct LoginView: View {
                             
                         } else {
                             message = "E-mail ou senha incorretos"
+                            
                         }
                     }
                 }
@@ -153,6 +162,7 @@ struct LoginView: View {
                 .frame(width: 320, height: 48)
                 .background(Color("AppColor/MarginSecondary"))
                 .cornerRadius(8)
+                .accessibility(hint: Text("Pressione para entrar no aplicativo"))
             
             if message != "" {
                 Text(message)
@@ -161,6 +171,7 @@ struct LoginView: View {
             Button("Não tem cadastro? Se Cadastre!"){
                 show = true
             }.foregroundColor(Color("AppColor/TaskMain")).padding()
+                .accessibility(hint: Text("Pressione o texto para se cadastrar!"))
             
         }
         .padding()

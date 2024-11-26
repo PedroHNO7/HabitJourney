@@ -51,6 +51,7 @@ struct HomeScreen: View {
                         Text("Sair").font(.subheadline)
                             .bold()
                             .foregroundColor(Color("AppColor/TaskMain"))
+                            .accessibility(hint: Text("Pressione para sair do aplicativo"))
                     }
                 }
             }.padding(.bottom, 120)

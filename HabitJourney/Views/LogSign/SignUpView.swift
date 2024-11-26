@@ -48,22 +48,26 @@ struct SignUpView: View {
                 .font(.title)
                 .bold()
                 .foregroundColor(Color("AppColor/TaskMain"))
+                .accessibility(label: Text("Tela de Registro"))
             
             CustomTextField(fieldModel: $nameField)
                 .foregroundColor(Color("AppColor/TaskMain"))
                 .onSubmit {
                     nameField.onSubmitError()
                 }
+                .accessibility(label: Text("Digite o seu nome"))
             
             CustomTextField(fieldModel: $emailField).foregroundColor(Color("AppColor/TaskMain"))
                 .onSubmit {
                     emailField.onSubmitError()
                 }.autocapitalization(.none)
+                .accessibility(label: Text("Digite o seu email"))
             
             CustomTextField(fieldModel: $passwordField).foregroundColor(Color("AppColor/TaskMain"))
                 .onSubmit {
                     emailField.onSubmitError()
                 }.autocapitalization(.none)
+                .accessibility(label: Text("Digite a sua senha"))
             
             Button("Cadastrar"){
                 
@@ -79,6 +83,7 @@ struct SignUpView: View {
                     if (db.insertUser(user: user)){
                         show = true
                         
+                        
                         dismiss()
                     }
                 } else {
@@ -89,13 +94,17 @@ struct SignUpView: View {
                 .frame(width: 320, height: 48)
                 .background(Color("AppColor/MarginSecondary"))
                 .cornerRadius(8)
+                .accessibility(label: Text("Cadastar"))
+                .accessibility(hint: Text("Pressione para salvar as informações de cadastro"))
         }
         .alert(isPresented: $show) {
-            Alert( title: Text("Sucesso"),
-                   message: Text("\(userName) Inserido com sucessso"),
-                   dismissButton: .default(Text("Ok"))
+            Alert(
+                title: Text("Sucesso"),
+                message: Text("\(userName) inserido com sucesso"),
+                dismissButton: .default(Text("Ok"))
             )
         }
+        
     }
 }
 

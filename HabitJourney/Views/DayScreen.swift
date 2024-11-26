@@ -43,6 +43,7 @@ struct DayScreen: View {
 
                 NavigationLink(destination: AddScreen(userID: $userID, habitField: FieldModel(value: "", fieldType: .habit), selectedDate: selectedDate)) {
                     Image("Button")
+                        .accessibility(hint: Text("Pressione para adicionar tarefas"))
                 }
             }
             .padding(.trailing, 20)

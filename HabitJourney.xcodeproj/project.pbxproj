@@ -329,11 +329,12 @@
 			};
 			buildConfigurationList = 22226FE32BFD542800120B74 /* Build configuration list for PBXProject "HabitJourney" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				"pt-BR",
 				Base,
+				en,
 			);
 			mainGroup = 22226FDF2BFD542800120B74;
 			packageReferences = (
@@ -522,6 +523,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HabitJourney/Preview Content\"";
+				DEVELOPMENT_TEAM = 9TB53BC3K2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HabitJourney/Info.plist;
@@ -551,6 +553,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HabitJourney/Preview Content\"";
+				DEVELOPMENT_TEAM = 9TB53BC3K2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HabitJourney/Info.plist;
